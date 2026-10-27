@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bgrsf4ars0t2k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4rnwr"]
+
+[sub_resource type="Sky" id="Sky_vbetb"]
+sky_material = SubResource("ProceduralSkyMaterial_4rnwr")
+
+[sub_resource type="Environment" id="Environment_g7fu1"]
+background_mode = 2
+sky = SubResource("Sky_vbetb")
+
+[node name="Node3D" type="WorldEnvironment" unique_id=223647769]
+environment = SubResource("Environment_g7fu1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=934387605]

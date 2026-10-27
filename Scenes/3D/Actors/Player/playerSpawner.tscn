@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cpkoj21d21a2h"]
+
+[ext_resource type="Script" uid="uid://jk5ytrqlkrik" path="res://Scripts/Charecters/Player/PlayerSpawner.gd" id="1_82120"]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" unique_id=473352764]
+spawn_path = NodePath(".")
+script = ExtResource("1_82120")
+metadata/_custom_type_script = "uid://jk5ytrqlkrik"

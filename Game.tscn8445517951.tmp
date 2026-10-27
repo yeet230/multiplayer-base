@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d2yrx0eq5vatf"]
+
+[ext_resource type="Script" uid="uid://bsf80h6bm1j6m" path="res://Scripts/MainLevel.gd" id="1_wbfu4"]
+[ext_resource type="PackedScene" uid="uid://bpblj5osn52mf" path="res://MainMenu.tscn" id="2_xkndl"]
+
+[node name="Game" type="Node" unique_id=1003189469]
+script = ExtResource("1_wbfu4")
+
+[node name="LevelContainer" type="Node" parent="." unique_id=264233761]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="." unique_id=142060000 instance=ExtResource("2_xkndl")]

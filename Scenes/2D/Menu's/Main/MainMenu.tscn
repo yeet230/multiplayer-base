@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bpblj5osn52mf"]
+
+[ext_resource type="Script" uid="uid://yv2w3la70h3r" path="res://Scripts/Menu's/Main/MainMenu.gd" id="1_i26rj"]
+[ext_resource type="PackedScene" uid="uid://bwdt4nq8pr5ke" path="res://Scenes/2D/Menu's/Main/ClientMenu.tscn" id="2_eiy7p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i26rj"]
+bg_color = Color(0.38170326, 0.38170323, 0.38170317, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72419745, 0.50442946, 0.14627871, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiy7p"]
+bg_color = Color(0.31764707, 0.31764707, 0.31764707, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.10747973, 0.10747976, 0.107479624, 1)
+
+[sub_resource type="Theme" id="Theme_i26rj"]
+Button/styles/hover = SubResource("StyleBoxFlat_i26rj")
+Button/styles/normal = SubResource("StyleBoxFlat_eiy7p")
+
+[node name="MainMenu" type="Control" unique_id=142060000]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i26rj")
+
+[node name="DisplayElements" type="CanvasLayer" parent="." unique_id=1055677627]
+
+[node name="MenuItems" type="CanvasLayer" parent="." unique_id=1925073819]
+
+[node name="MainMenu" type="VBoxContainer" parent="MenuItems" unique_id=696036975]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -85.5
+offset_right = 60.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_i26rj")
+
+[node name="Play" type="Button" parent="MenuItems/MainMenu" unique_id=279220662]
+layout_mode = 2
+text = "Play"
+
+[node name="Host" type="Button" parent="MenuItems/MainMenu" unique_id=418394136]
+layout_mode = 2
+text = "Host"
+
+[node name="GameSettings" type="Button" parent="MenuItems/MainMenu" unique_id=1149132878]
+layout_mode = 2
+text = "Game Settings"
+
+[node name="QuickJoin" type="Button" parent="MenuItems/MainMenu" unique_id=1839017426]
+layout_mode = 2
+text = "DevLevel"
+
+[node name="Quit" type="Button" parent="MenuItems/MainMenu" unique_id=1955174501]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="ClientMenu" parent="MenuItems" unique_id=484369215 instance=ExtResource("2_eiy7p")]
+visible = false
+
+[connection signal="pressed" from="MenuItems/MainMenu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MenuItems/MainMenu/QuickJoin" to="." method="_on_quick_join_pressed"]
+[connection signal="pressed" from="MenuItems/MainMenu/Quit" to="." method="_on_quit_pressed"]

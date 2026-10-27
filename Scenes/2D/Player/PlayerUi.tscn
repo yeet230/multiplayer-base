@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dn65ko5xr4wa6"]
+
+[node name="Control" type="Control" unique_id=1099339340]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugUI" type="CanvasLayer" parent="." unique_id=1013096440]
+
+[node name="LeftVBoxContainer" type="VBoxContainer" parent="DebugUI" unique_id=922441176]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPS" type="Label" parent="DebugUI/LeftVBoxContainer" unique_id=157524981]
+layout_mode = 2
+text = "FPS: "
+
+[node name="RightVBoxContainer" type="VBoxContainer" parent="DebugUI" unique_id=2046069394]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Position" type="Label" parent="DebugUI/RightVBoxContainer" unique_id=338944587]
+layout_mode = 2
+text = "Position:"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dsbs1ttk1ctpq"]
+
+[ext_resource type="PackedScene" uid="uid://cpkoj21d21a2h" path="res://Scenes/3D/Actors/Player/playerSpawner.tscn" id="1_3v7n7"]
+
+[node name="LevelOne" type="Node" unique_id=1854776184]
+
+[node name="PlayerSpawner" parent="." unique_id=473352764 instance=ExtResource("1_3v7n7")]
