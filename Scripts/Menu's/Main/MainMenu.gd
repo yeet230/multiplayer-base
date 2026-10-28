@@ -1,7 +1,9 @@
-extends Control
+extends Node
 
-@onready var mainMenu: VBoxContainer = $MenuItems/MainMenu
-@onready var clientMenu: Control = $MenuItems/ClientMenu
+@onready var mainMenu: VBoxContainer = $MenuItems/Menu/MainMenu
+@onready var clientMenu: Control = $MenuItems/Menu/ClientMenu
+@onready var displayElementsCanvasLayer: CanvasLayer = $DisplayElements
+@onready var menuItemsCanvasLayer: CanvasLayer = $MenuItems
 
 func _ready() -> void:
 	_auto_mode_set()
@@ -33,4 +35,9 @@ func _on_quit_pressed() -> void:
 
 func _on_quick_join_pressed() -> void:
 	MultiplayerManager.join_server("127.0.0.1")
-	self.hide()
+	set_canvas_items_visibility(false)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func set_canvas_items_visibility(newState : bool) -> void:
+	displayElementsCanvasLayer.visible = newState
+	menuItemsCanvasLayer.visible = newState

@@ -1,6 +1,8 @@
-class_name InputHandler extends Node
+class_name PlayerInputHandler extends Node
+##Handles all user input required for the player to interact with the world.
+##It will also update other player managers/handlers accordingly 
 
-@export var localPlayer: Player = get_parent()
+@export var player: Player = get_parent()
 
 var isJumpPressed: bool = false
 var isSprintPressed: bool = false
@@ -16,16 +18,49 @@ var isShootPressed: bool = false
 var isReloadPressed: bool = false
 var isShootReleased: bool = false
 
-func tick(delta : float) -> void:
-	pass
-
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
-
 	
 	if event is InputEventMouseMotion:
-		pass
-	elif event is InputEventMouseButton:
-		pass    
-	elif event is InputEventKey:
-		pass
+		player.visionManager.look_around(event.relative)
+	#
+	#elif event is InputEventKey:
+		#if event.is_action_pressed("ui_cancel"):
+			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		#elif event.is_action_pressed("flash light"):
+			#player.playerEnabledLight = !player.playerEnabledLight
+			
+
+func tick() -> void:
+	_update_input_values()
+	_push_updated_input_values()
+
+func _update_input_values() -> void:
+	isJumpPressed = Input.is_action_pressed("jump")
+	#isCrouchPressed = Input.is_action_pressed("crouch")
+	#isSprintPressed = Input.is_action_pressed("sprint")
+	#isDashPressed = Input.is_action_just_pressed("dash")
+	moveDir = Input.get_vector("left", "right", "forward", "backward")
+	
+	isShootPressed = Input.is_action_just_pressed("shoot")
+	isShootReleased = Input.is_action_just_released("shoot")
+	isReloadPressed = Input.is_action_just_pressed("reload")
+	
+	toggleChat = Input.is_action_just_pressed("toggle_chat")
+	isEnterPressed = Input.is_action_just_pressed("ui_accept")
+	isBackPressed = Input.is_action_just_pressed("ui_cancel")
+
+func _push_updated_input_values() -> void:
+	player.movementController.isCrouchPressed = isCrouchPressed
+	player.movementController.isSprintPressed = isSprintPressed
+	player.movementController.isDashPressed = isDashPressed
+	player.movementController.isJumpPressed = isJumpPressed
+	player.movementController.moveDir = moveDir
+	
+	#player.weaponManager.isReloadPressed = isReloadPressed
+	#player.weaponManager.isShootPressed = isShootPressed
+	#player.weaponManager.isShootReleased = isShootReleased
+	#
+	#player.ui.isBackPressed = isBackPressed
+	#player.ui.isEnterPressed = isEnterPressed
+	#player.ui.toggleChat = toggleChat
