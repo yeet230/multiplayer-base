@@ -85,7 +85,7 @@ func _server_handle_player_join(peerId : int) -> void:
 
 func _server_handle_player_leave(peerId : int) -> void:
 	if !multiplayer.is_server():
-		multiplayer.peer_connected.disconnect(_server_handle_player_join)
+		multiplayer.peer_disconnected.disconnect(_server_handle_player_join)
 		return
 	
 	serverStoredPlayerData.erase(peerId)

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://burbtg5x3no0k"]
+
+[ext_resource type="Script" uid="uid://bdtkof8ycny6c" path="res://WeaponData.gd" id="1_ardkc"]
+
+[resource]
+script = ExtResource("1_ardkc")
+damage = null
+shootDist = null
+bulletSpread = null
+reloadSpeed = null
+fireRate = null
+projectilePerShot = null
+magSize = null
+loadedAmmo = null
+weaponId = null
+fireMode = null
+reloadType = null
+weaponName = null
+meshPosition = null
+meshRotation = null
+metadata/_custom_type_script = "uid://bdtkof8ycny6c"
