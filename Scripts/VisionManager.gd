@@ -42,3 +42,7 @@ func apply_recoil(amount : float) -> void:
 func get_camera() -> Camera3D:
 	var result = cameraList[activeCameraIndex]
 	return result
+
+func get_camera_position() -> Vector3:
+	var result = get_camera().global_position
+	return result

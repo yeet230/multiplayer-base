@@ -29,6 +29,7 @@ enum PLAYER_DATA {
 	SECONDARY_WEAPON,
 	GADGET,
 	ABILITY,
+	ACTIVE_WEAPON,
 	
 }
 
@@ -44,6 +45,16 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_server_handle_player_leave)
 	pass
 	
+
+func get_player_from_id(playerId : int) -> Player:
+	for player in get_tree().get_nodes_in_group("Players"):
+		if player.name == str(playerId):
+			return player
+	return null
+
+func get_player_weapon(playerId : int) -> Global.WEAPON_ID:
+	var result:Global.WEAPON_ID = serverStoredPlayerData[playerId][PLAYER_DATA.ACTIVE_WEAPON]
+	return result
 
 func start_server(data : Dictionary) -> void:
 	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
@@ -89,3 +100,14 @@ func _server_handle_player_leave(peerId : int) -> void:
 		return
 	
 	serverStoredPlayerData.erase(peerId)
+
+
+func server_handle_hit() -> void:
+	var senderId: int = multiplayer.get_remote_sender_id()
+	var player: Player = get_player_from_id(senderId)
+	var playerWeapon: Global.WEAPON_ID = get_player_weapon(senderId)
+	
+	player.weaponManager.perform_hitscan()
+	
+	
+	

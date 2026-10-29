@@ -21,6 +21,14 @@ class_name WeaponData extends Resource
 @export_subgroup("Other")
 @export var weaponName: String
 
+var weaponDropOffDamage: float 
+##Default is 0%. this means there is no damage reduction occuring
+@export_range(0, 100, 1, "suffix:%") var weaponDamageDropOffPercentage: float = 0.0:
+	get:
+		return weaponDropOffDamage * 100
+	set(value):
+		weaponDropOffDamage = value / 100
+
 @export_group("Weapon Mesh Settings")
 @export var mesh: Mesh
 @export var meshPosition: Vector3

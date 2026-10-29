@@ -4,18 +4,4 @@
 
 [resource]
 script = ExtResource("1_ardkc")
-damage = null
-shootDist = null
-bulletSpread = null
-reloadSpeed = null
-fireRate = null
-projectilePerShot = null
-magSize = null
-loadedAmmo = null
-weaponId = null
-fireMode = null
-reloadType = null
-weaponName = null
-meshPosition = null
-meshRotation = null
 metadata/_custom_type_script = "uid://bdtkof8ycny6c"

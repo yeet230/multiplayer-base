@@ -17,6 +17,10 @@ var isBackPressed: bool = false
 var isShootPressed: bool = false
 var isReloadPressed: bool = false
 var isShootReleased: bool = false
+var isAimPressed: bool = false
+var isPrimaryPressed: bool = false
+var isSecondaryPressed: bool = false
+var isMeleePressed: bool = false
 
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
@@ -45,6 +49,11 @@ func _update_input_values() -> void:
 	isShootPressed = Input.is_action_just_pressed("shoot")
 	isShootReleased = Input.is_action_just_released("shoot")
 	isReloadPressed = Input.is_action_just_pressed("reload")
+	isAimPressed = Input.is_action_pressed("aim")
+	isMeleePressed = Input.is_action_just_pressed("melee")
+	isPrimaryPressed = Input.is_action_just_pressed("primary")
+	isSecondaryPressed = Input.is_action_just_pressed("secondary")
+	
 	
 	toggleChat = Input.is_action_just_pressed("toggle_chat")
 	isEnterPressed = Input.is_action_just_pressed("ui_accept")
@@ -57,9 +66,11 @@ func _push_updated_input_values() -> void:
 	player.movementController.isJumpPressed = isJumpPressed
 	player.movementController.moveDir = moveDir
 	
-	#player.weaponManager.isReloadPressed = isReloadPressed
-	#player.weaponManager.isShootPressed = isShootPressed
-	#player.weaponManager.isShootReleased = isShootReleased
+	player.weaponManager.isReloadPressed = isReloadPressed
+	player.weaponManager.isShootPressed = isShootPressed
+	player.weaponManager.isShootReleased = isShootReleased
+	
+	
 	#
 	#player.ui.isBackPressed = isBackPressed
 	#player.ui.isEnterPressed = isEnterPressed
