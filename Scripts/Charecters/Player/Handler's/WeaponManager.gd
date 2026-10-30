@@ -51,46 +51,77 @@ var fireTimer: Timer
 
 func _equip_new_weapon(newWeapon : Global.WEAPON_ID) -> void:
 	if !multiplayer.is_server():
-		_equip_new_weapon.rpc_id(1, newWeapon)
+		server_update_equipped_weapon.rpc_id(1, newWeapon)
 	
 	isShootPressed = false
 	weaponData = Global.get_weapon_data(newWeapon)
 	load_weapon_data()
 	
+	if multiplayer.is_server():
+		print(Global.WEAPON_ID.find_key(newWeapon))
+	
+
+@rpc("any_peer", "call_remote", "reliable")
+func server_update_equipped_weapon(newWeapon : Global.WEAPON_ID) -> void:
+	_equip_new_weapon(newWeapon)
 
 func load_weapon_data() -> void:
 	bulletDamage = weaponData.damage
-	loadedCount = weaponData.ammo
+	loadedCount = weaponData.loadedAmmo
 	magSize = weaponData.magSize
 	weaponName = weaponData.weaponName
-	weaponId = weaponData.weaponID
+	weaponId = weaponData.weaponId
 	fireMode = weaponData.fireMode
 	reloadType = weaponData.reloadType
-	maxRange = weaponData.shootDistance
+	maxRange = weaponData.shootDist
 	reloadSpeed = weaponData.reloadSpeed
 	fireRate = weaponData.fireRate
 	spread = weaponData.bulletSpread
-	projectilesPerShot = weaponData.projectilesPerShot
+	projectilesPerShot = weaponData.projectilePerShot
 
 func tick() -> void:
 	if isShootPressed:
-		_player_trigger_released()
-	elif isShootReleased:
 		_player_trigger_pressed()
+		print("Shooting")
+	elif isShootReleased:
+		_player_trigger_released()
+		print("Not Shooting")
 	elif isReloadPressed:
 		_start_reload()
+		#print("Reloading")
 
 func _player_trigger_pressed() -> void:
-	pass
+	isTriggerHeld = true
+	
+	# Interrupt shell-by-shell reload if we have at least one shell loaded.
+	if isReloading and loadedCount > 0:
+		cancel_reload()
+	
+	try_fire()
 
 func _player_trigger_released() -> void:
-	pass
+	isTriggerHeld = false
+	print("i'm here :0")
 
 func _start_reload() -> void:
 	if isReloading: return
 	if loadedCount >= magSize: return
+
+func try_fire() -> void:
+	if !canFire: return
+	if isReloading: return
+	if loadedCount <= 0: return
 	
-	
+	match fireMode:
+		WEAPON_BEHAVIOR.SEMI_FIRE:
+			fire_single_shot()
+		WEAPON_BEHAVIOR.AUTO_FIRE:
+			fire_single_shot()
+		WEAPON_BEHAVIOR.BURST_FIRE:
+			burstShotsRemaining = projectilesPerShot
+			fire_burst_shot()
+		WEAPON_BEHAVIOR.SHOTGUN_FIRE:
+			fire_shotgun_shot()
 
 func perform_hitscan() -> Dictionary:
 	var activeCamera: Camera3D = localPlayer.visionManager.get_camera()
@@ -101,6 +132,17 @@ func perform_hitscan() -> Dictionary:
 	var results: Dictionary = spaceState.intersect_ray(query)
 	
 	return results
+
+func _handle_hit_check() -> void:
+	MultiplayerManager.server_handle_hit.rpc_id(1)
+	
+	var result: Dictionary = perform_hitscan()
+	
+	if result.is_empty(): return
+	
+	var collider: Node3D = result.get("collider")
+	
+	
 
 func setup_timers() -> void:
 	reloadTimer = Timer.new()
@@ -113,7 +155,10 @@ func setup_timers() -> void:
 	fireTimer.timeout.connect(_on_fire_timeout)
 	
 	reloadTimer.autostart = false
+	reloadTimer.one_shot = true
 	fireTimer.autostart = false
+	fireTimer.one_shot = true
+	
 
 func _ready() -> void:
 	setup_timers()
@@ -142,6 +187,32 @@ func _on_fire_timeout() -> void:
 	
 	match fireMode:
 		WEAPON_BEHAVIOR.AUTO_FIRE:
-			fire_single_shot()
+			if isTriggerHeld and !isReloading:
+				fire_single_shot()
+				print("Fire called from here")
+			print(isTriggerHeld, "  :  ", !isReloading)
+	
 		WEAPON_BEHAVIOR.BURST_FIRE:
 			fire_burst_shot()
+
+func fire_single_shot() -> void:
+	loadedCount -= 1
+	_handle_hit_check()
+	begin_fire_cooldown()
+
+func fire_burst_shot() -> void:
+	if burstShotsRemaining <= 0: return
+	
+	loadedCount -= 1
+	burstShotsRemaining -= 1
+	
+	_handle_hit_check()
+	begin_fire_cooldown()
+
+func fire_shotgun_shot() -> void:
+	loadedCount -= 1
+	
+	for i in range(projectilesPerShot):
+		_handle_hit_check()
+	
+	begin_fire_cooldown()

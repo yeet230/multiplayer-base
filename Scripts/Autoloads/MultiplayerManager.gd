@@ -92,7 +92,6 @@ func _server_handle_player_join(peerId : int) -> void:
 		return
 	
 	
-	
 
 func _server_handle_player_leave(peerId : int) -> void:
 	if !multiplayer.is_server():
@@ -101,13 +100,13 @@ func _server_handle_player_leave(peerId : int) -> void:
 	
 	serverStoredPlayerData.erase(peerId)
 
-
+@rpc("any_peer", "call_remote", "reliable")
 func server_handle_hit() -> void:
 	var senderId: int = multiplayer.get_remote_sender_id()
 	var player: Player = get_player_from_id(senderId)
-	var playerWeapon: Global.WEAPON_ID = get_player_weapon(senderId)
+	#var playerWeapon: Global.WEAPON_ID = get_player_weapon(senderId)
 	
-	player.weaponManager.perform_hitscan()
-	
+	var results: Dictionary = player.weaponManager.perform_hitscan()
+	print("Server Weapon HitScan Results: ", results)
 	
 	

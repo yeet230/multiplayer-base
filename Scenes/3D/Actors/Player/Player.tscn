@@ -60,3 +60,5 @@ metadata/_custom_type_script = "uid://cqrprdyognihs"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1684267837]
 replication_config = SubResource("SceneReplicationConfig_nq4pf")
+
+[node name="PlayerUI" type="CanvasLayer" parent="." unique_id=181661168]

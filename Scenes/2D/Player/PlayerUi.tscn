@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dn65ko5xr4wa6"]
 
+[ext_resource type="Script" uid="uid://c17k7gp4p6q3h" path="res://Scripts/Charecters/Player/PlayerUi.gd" id="1_uc6jw"]
+
 [node name="Control" type="Control" unique_id=1099339340]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_uc6jw")
 
 [node name="DebugUI" type="CanvasLayer" parent="." unique_id=1013096440]
 
@@ -17,6 +20,9 @@ offset_bottom = 40.0
 [node name="FPS" type="Label" parent="DebugUI/LeftVBoxContainer" unique_id=157524981]
 layout_mode = 2
 text = "FPS: "
+
+[node name="Id" type="Label" parent="DebugUI/LeftVBoxContainer" unique_id=960357341]
+layout_mode = 2
 
 [node name="RightVBoxContainer" type="VBoxContainer" parent="DebugUI" unique_id=2046069394]
 anchors_preset = 1
@@ -29,5 +35,8 @@ grow_horizontal = 0
 [node name="Position" type="Label" parent="DebugUI/RightVBoxContainer" unique_id=338944587]
 layout_mode = 2
 text = "Position:"
+
+[node name="Ammo" type="Label" parent="DebugUI/RightVBoxContainer" unique_id=1992994329]
+layout_mode = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]

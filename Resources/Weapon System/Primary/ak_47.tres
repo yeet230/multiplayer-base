@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bo6xlxs76q3ng"]
+
+[ext_resource type="Script" uid="uid://bdtkof8ycny6c" path="res://WeaponData.gd" id="1_sya33"]
+
+[resource]
+script = ExtResource("1_sya33")
+damage = 30.0
+shootDist = 100.0
+reloadSpeed = 3.2
+fireRate = 0.071
+projectilePerShot = 1
+magSize = 31
+loadedAmmo = 32
+fireMode = 2
+weaponName = "AK 47"
+metadata/_custom_type_script = "uid://bdtkof8ycny6c"
