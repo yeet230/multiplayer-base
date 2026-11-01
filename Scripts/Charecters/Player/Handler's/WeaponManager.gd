@@ -82,13 +82,13 @@ func load_weapon_data() -> void:
 func tick() -> void:
 	if isShootPressed:
 		_player_trigger_pressed()
-		print("Shooting")
+		print("Shoot pressed")
 	elif isShootReleased:
 		_player_trigger_released()
-		print("Not Shooting")
+		print("shoot Released")
 	elif isReloadPressed:
 		_start_reload()
-		#print("Reloading")
+		print("Reloading")
 
 func _player_trigger_pressed() -> void:
 	isTriggerHeld = true
@@ -101,11 +101,13 @@ func _player_trigger_pressed() -> void:
 
 func _player_trigger_released() -> void:
 	isTriggerHeld = false
-	print("i'm here :0")
 
 func _start_reload() -> void:
 	if isReloading: return
 	if loadedCount >= magSize: return
+	
+	isReloading = true
+	reloadTimer.start(reloadSpeed)
 
 func try_fire() -> void:
 	if !canFire: return
@@ -166,15 +168,31 @@ func _ready() -> void:
 func cancel_reload() -> void:
 	isReloading = false
 	reloadTimer.stop()
+	print("reload cancelled")
 
 func begin_reload_timer() -> void:
 	if isReloading or loadedCount >= magSize: return
-	
+	print("Reload Begun")
 	isReloading = true
 	reloadTimer.start(reloadSpeed)
 
 func _on_reload_timeout() -> void:
-	pass
+	match reloadType:
+		RELOAD_TYPE.MAG:
+			loadedCount += magSize
+			isReloading = false
+		RELOAD_TYPE.SLUG:
+			loadedCount += 1
+			
+			if loadedCount < magSize:
+				loadedCount += 1
+				
+				if loadedCount < magSize:
+					reloadTimer.start(reloadSpeed)
+				else:
+					isReloading = false
+		
+	loadedCount = clamp(loadedCount, 0, magSize + 1)
 
 func begin_fire_cooldown() -> void:
 	canFire = false

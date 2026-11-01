@@ -95,10 +95,18 @@ func _server_handle_player_join(peerId : int) -> void:
 
 func _server_handle_player_leave(peerId : int) -> void:
 	if !multiplayer.is_server():
-		multiplayer.peer_disconnected.disconnect(_server_handle_player_join)
+		multiplayer.peer_disconnected.disconnect(_server_handle_player_leave)
 		return
 	
 	serverStoredPlayerData.erase(peerId)
+
+
+func _handle_player_hit(shootingPlayerId : int, hitPlayerId : int) -> void:
+	var hitPlayer: Player = get_player_from_id(hitPlayerId)
+	var weapon: Global.WEAPON_ID = get_player_weapon(shootingPlayerId)
+	var weaponDamage: float = Global.get_weapon_damage(weapon)
+	
+	hitPlayer.healthManager.take_damage()
 
 @rpc("any_peer", "call_remote", "reliable")
 func server_handle_hit() -> void:
@@ -107,6 +115,21 @@ func server_handle_hit() -> void:
 	#var playerWeapon: Global.WEAPON_ID = get_player_weapon(senderId)
 	
 	var results: Dictionary = player.weaponManager.perform_hitscan()
+	
+	if results.is_empty(): return
+	
+	var collider: Node3D = results.get("collider")
+	
+	if collider is Player:
+		var hitPlayerId: int = int(collider.name)
+		_handle_player_hit(senderId, hitPlayerId)
+	else:
+		var hitPosition: Vector3 = results.get("position")
+		var hitNormal: Vector3 = results.get("normal")
+		var hitObjectPath: NodePath = get_path_to(collider)
+		
+		Global.root.spawn_bullet_decal.rpc(hitPosition, hitNormal, hitObjectPath)
+	
 	print("Server Weapon HitScan Results: ", results)
 	
 	

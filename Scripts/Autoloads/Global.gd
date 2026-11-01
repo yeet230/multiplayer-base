@@ -25,6 +25,9 @@ var weaponData: Dictionary[WEAPON_ID, WeaponData]
 var PlayerStartingHealth: float = 100
 var mouseSens: float = 0.002
 
+var root: Node 
+
+
 func _ready() -> void:
 	levels = { 
 		MAPS.DEV : preload("res://Scenes/3D/Levels/Dev/Dev.tscn"),
@@ -34,17 +37,26 @@ func _ready() -> void:
 	weaponData = {
 		WEAPON_ID.AK_47 : preload("res://Resources/Weapon System/Primary/ak_47.tres"),
 	}
+	
+
 
 func get_level(levelId : MAPS) -> PackedScene:
 	var result: PackedScene = levels[levelId]
 	return result
 
 
-func throw_error(errCode : ERROR_CODES, text : String) -> void:
-	pass
+
+func throw_error(errCode : ERROR_CODES, text : String = "") -> void:
+	var errorKey: String = str(ERROR_CODES.find_key(errCode))
+	var formattedString: String = str(errorKey, " : ", errCode, "\n", text )
+	assert(false, formattedString)
 
 func get_weapon_data(weaponId : WEAPON_ID) -> WeaponData:
 	var result: WeaponData = weaponData[weaponId]
+	return result
+
+func get_weapon_damage(weponId : WEAPON_ID) -> float:
+	var result: float = weaponData[weponId].damage
 	return result
 
 #func get_user_current_weapon() -> Weapon:
