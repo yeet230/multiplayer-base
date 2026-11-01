@@ -131,5 +131,8 @@ func server_handle_hit() -> void:
 		Global.root.spawn_bullet_decal.rpc(hitPosition, hitNormal, hitObjectPath)
 	
 	print("Server Weapon HitScan Results: ", results)
-	
-	
+
+@rpc("any_peer", "call_remote", "reliable")
+
+func _update_player_health(playerId : int) -> void:
+	pass

@@ -26,6 +26,7 @@ var PlayerStartingHealth: float = 100
 var mouseSens: float = 0.002
 
 var root: Node 
+var commandHandler: CommandHandler
 
 
 func _ready() -> void:

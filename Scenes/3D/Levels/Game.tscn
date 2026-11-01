@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsf80h6bm1j6m" path="res://Scripts/MainLevel.gd" id="1_rschu"]
 [ext_resource type="PackedScene" uid="uid://bpblj5osn52mf" path="res://Scenes/2D/Menu's/Main/MainMenu.tscn" id="2_g2nft"]
+[ext_resource type="Script" uid="uid://byhc10uvgpset" path="res://Scripts/Custom Nodes/CommandSystem.gd" id="3_g2nft"]
 
 [node name="Game" type="Node" unique_id=1003189469]
 script = ExtResource("1_rschu")
@@ -14,3 +15,7 @@ spawn_path = NodePath("../LevelContainer")
 unique_name_in_owner = true
 
 [node name="MainMenu" parent="." unique_id=142060000 instance=ExtResource("2_g2nft")]
+
+[node name="CommandHandler" type="Node" parent="." unique_id=1329818604]
+script = ExtResource("3_g2nft")
+metadata/_custom_type_script = "uid://byhc10uvgpset"

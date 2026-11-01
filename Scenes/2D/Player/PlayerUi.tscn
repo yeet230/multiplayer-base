@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dn65ko5xr4wa6"]
 
 [ext_resource type="Script" uid="uid://c17k7gp4p6q3h" path="res://Scripts/Charecters/Player/PlayerUi.gd" id="1_uc6jw"]
+[ext_resource type="PackedScene" uid="uid://mn58j4guba4j" path="res://playerCommandUI.tscn" id="2_12qdn"]
 
 [node name="Control" type="Control" unique_id=1099339340]
 layout_mode = 3
@@ -38,5 +39,7 @@ text = "Position:"
 
 [node name="Ammo" type="Label" parent="DebugUI/RightVBoxContainer" unique_id=1992994329]
 layout_mode = 2
+
+[node name="PlayerCommandUI" parent="DebugUI" unique_id=412367365 instance=ExtResource("2_12qdn")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://mn58j4guba4j"]
+
+[ext_resource type="Script" uid="uid://bt1mqkrypej81" path="res://PlayerUICommandHandler.gd" id="1_kuext"]
+
+[sub_resource type="Theme" id="Theme_g7fu1"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4rnwr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vbetb"]
+texture = SubResource("CanvasTexture_4rnwr")
+modulate_color = Color(0, 0, 0, 0.7019608)
+
+[node name="PlayerCommandUI" type="Panel" unique_id=412367365]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -283.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_g7fu1")
+theme_override_styles/panel = SubResource("StyleBoxTexture_vbetb")
+script = ExtResource("1_kuext")
+
+[node name="ConsoleOutput" type="RichTextLabel" parent="." unique_id=407972313]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_following = true
+vertical_alignment = 2
+
+[node name="ConsoleInput" type="LineEdit" parent="." unique_id=2092772951]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[connection signal="text_submitted" from="ConsoleInput" to="." method="_on_console_input_text_submitted"]
