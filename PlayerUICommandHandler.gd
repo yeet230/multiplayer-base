@@ -9,7 +9,7 @@ var index : int = -1
 
 func _ready() -> void:
 	visible = false
-	Global.commandHandler.UIHandler = self
+	#Global.commandHandler.UIHandler = self
 	
 
 func _update_log() -> void:
