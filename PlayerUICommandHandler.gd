@@ -9,7 +9,10 @@ var index : int = -1
 
 func _ready() -> void:
 	visible = false
+	print(Global, " : ", Global.commandHandler, " : ", Global.commandHandler.UIHandler)
 	Global.commandHandler.UIHandler = self
+	print(Global, " : ", Global.commandHandler, " : ", Global.commandHandler.UIHandler)
+	
 	
 
 func _update_log() -> void:

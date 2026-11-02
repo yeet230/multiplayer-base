@@ -4,15 +4,18 @@ class_name CommandHandler extends Node
 var clientCommands: Dictionary[String, Callable] = {}
 var serverCommands: Dictionary[String, Callable]
 var cmdAliases: PackedStringArray = []
-var UIHandler: Control
+var UIHandler: Panel
 
 
 func _ready() -> void:
+	Global.commandHandler = self
+	
 	register_command(["help"], _command_help)
 	register_command(["tp", "teleport"], _command_player_teleport)
 	register_command(["freecam", "noclip"], _command_player_freecam)
 	#register_command(["give"], _command_give_player_weapon)
 	#register_command(["setHealth"], _command_set_player_health)
+	
 	
 
 

@@ -11,11 +11,11 @@ script = ExtResource("1_rschu")
 _spawnable_scenes = PackedStringArray("uid://ccvpekgqunofh", "uid://dsbs1ttk1ctpq")
 spawn_path = NodePath("../LevelContainer")
 
+[node name="CommandHandler" type="Node" parent="." unique_id=1329818604]
+script = ExtResource("3_g2nft")
+metadata/_custom_type_script = "uid://byhc10uvgpset"
+
 [node name="LevelContainer" type="Node" parent="." unique_id=264233761]
 unique_name_in_owner = true
 
 [node name="MainMenu" parent="." unique_id=142060000 instance=ExtResource("2_g2nft")]
-
-[node name="CommandHandler" type="Node" parent="." unique_id=1329818604]
-script = ExtResource("3_g2nft")
-metadata/_custom_type_script = "uid://byhc10uvgpset"
