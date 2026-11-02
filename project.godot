@@ -25,6 +25,10 @@ MultiplayerManager="*uid://dps2a5kcnfxce"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[dotnet]
+
+project/assembly_name="Multiplayer-Base"
+
 [file_customization]
 
 folder_colors={

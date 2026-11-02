@@ -42,4 +42,18 @@ layout_mode = 2
 
 [node name="PlayerCommandUI" parent="DebugUI" unique_id=412367365 instance=ExtResource("2_12qdn")]
 
+[node name="HealthBar" type="ProgressBar" parent="DebugUI" unique_id=801175615]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -243.5
+offset_top = -27.0
+offset_right = 243.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]
