@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bd4yrrb6w6vb4" path="res://Scripts/Charecters/Player/Handler's/PlayerMovmentController.gd" id="3_lk4yj"]
 [ext_resource type="Script" uid="uid://cqrprdyognihs" path="res://Scripts/VisionManager.gd" id="4_lk4yj"]
 [ext_resource type="Script" uid="uid://clr3uhptb0bq4" path="res://Scripts/Charecters/Player/Handler's/WeaponManager.gd" id="4_urwc2"]
+[ext_resource type="Script" uid="uid://dfx1o75paot3l" path="res://Scripts/Charecters/Player/Handler's/PlayerHealthManager.gd" id="5_xkto7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7fu1"]
 
@@ -41,6 +42,11 @@ script = ExtResource("4_urwc2")
 mainCamera = NodePath("../VisionManager/Head/Camera3D")
 localPlayer = NodePath("..")
 metadata/_custom_type_script = "uid://clr3uhptb0bq4"
+
+[node name="PlayerHealthManager" type="Node" parent="." unique_id=452151732 node_paths=PackedStringArray("localPlayer")]
+script = ExtResource("5_xkto7")
+localPlayer = NodePath("..")
+metadata/_custom_type_script = "uid://dfx1o75paot3l"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=210439886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

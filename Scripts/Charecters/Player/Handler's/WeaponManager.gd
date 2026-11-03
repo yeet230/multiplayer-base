@@ -82,13 +82,13 @@ func load_weapon_data() -> void:
 func tick() -> void:
 	if isShootPressed:
 		_player_trigger_pressed()
-		print("Shoot pressed")
+		#print("Shoot pressed")
 	elif isShootReleased:
 		_player_trigger_released()
-		print("shoot Released")
+		#print("shoot Released")
 	elif isReloadPressed:
 		_start_reload()
-		print("Reloading")
+		#print("Reloading")
 
 func _player_trigger_pressed() -> void:
 	isTriggerHeld = true
@@ -168,11 +168,11 @@ func _ready() -> void:
 func cancel_reload() -> void:
 	isReloading = false
 	reloadTimer.stop()
-	print("reload cancelled")
+
 
 func begin_reload_timer() -> void:
 	if isReloading or loadedCount >= magSize: return
-	print("Reload Begun")
+	
 	isReloading = true
 	reloadTimer.start(reloadSpeed)
 
@@ -207,8 +207,6 @@ func _on_fire_timeout() -> void:
 		WEAPON_BEHAVIOR.AUTO_FIRE:
 			if isTriggerHeld and !isReloading:
 				fire_single_shot()
-				print("Fire called from here")
-			print(isTriggerHeld, "  :  ", !isReloading)
 	
 		WEAPON_BEHAVIOR.BURST_FIRE:
 			fire_burst_shot()

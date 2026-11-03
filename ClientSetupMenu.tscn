@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b5mpr558jlnqh"]
+
+[ext_resource type="Script" uid="uid://dv4eauyle3hs7" path="res://PlayerSetupMenu.gd" id="1_466ux"]
+
+[node name="Control" type="Control" unique_id=766624217]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_466ux")
+
+[node name="Options" type="VBoxContainer" parent="." unique_id=572513962]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 44.0
+
+[node name="Primary" type="OptionButton" parent="Options" unique_id=628983427]
+layout_mode = 2
+
+[node name="Secondary" type="OptionButton" parent="Options" unique_id=72994088]
+layout_mode = 2

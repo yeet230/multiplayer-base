@@ -2,6 +2,17 @@
 
 [ext_resource type="Script" uid="uid://c17k7gp4p6q3h" path="res://Scripts/Charecters/Player/PlayerUi.gd" id="1_uc6jw"]
 [ext_resource type="PackedScene" uid="uid://mn58j4guba4j" path="res://playerCommandUI.tscn" id="2_12qdn"]
+[ext_resource type="Shader" uid="uid://y32m2qedmwcg" path="res://Shaders/HealthBar.gdshader" id="3_to7aa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6exp"]
+shader = ExtResource("3_to7aa")
+shader_parameter/stepify = true
+shader_parameter/value = 1.0
+shader_parameter/count = 4
+shader_parameter/margin = Vector2(0.755, 0)
+shader_parameter/shear_angle = -0.049999954874999974
+shader_parameter/use_value_gradient = false
+shader_parameter/invert = false
 
 [node name="Control" type="Control" unique_id=1099339340]
 layout_mode = 3
@@ -42,15 +53,17 @@ layout_mode = 2
 
 [node name="PlayerCommandUI" parent="DebugUI" unique_id=412367365 instance=ExtResource("2_12qdn")]
 
-[node name="HealthBar" type="ProgressBar" parent="DebugUI" unique_id=801175615]
+[node name="HealthBar" type="ColorRect" parent="DebugUI" unique_id=1010039361]
+material = SubResource("ShaderMaterial_n6exp")
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -243.5
-offset_top = -27.0
+offset_top = -30.0
 offset_right = 243.5
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4

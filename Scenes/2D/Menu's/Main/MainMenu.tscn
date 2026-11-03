@@ -59,6 +59,10 @@ text = "Quit
 visible = false
 layout_mode = 1
 
+[node name="OptionButton" type="OptionButton" parent="MenuItems" unique_id=31367981]
+item_count = 1
+popup/item_0/id = 0
+
 [connection signal="pressed" from="MenuItems/Menu/MainMenu/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MenuItems/Menu/MainMenu/QuickJoin" to="." method="_on_quick_join_pressed"]
 [connection signal="pressed" from="MenuItems/Menu/MainMenu/Quit" to="." method="_on_quit_pressed"]

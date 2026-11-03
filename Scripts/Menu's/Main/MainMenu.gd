@@ -5,8 +5,10 @@ extends Node
 @onready var displayElementsCanvasLayer: CanvasLayer = $DisplayElements
 @onready var menuItemsCanvasLayer: CanvasLayer = $MenuItems
 
+
 func _ready() -> void:
 	_auto_mode_set()
+	
 
 
 func _on_host_pressed() -> void:

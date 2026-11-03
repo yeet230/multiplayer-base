@@ -6,12 +6,13 @@ var ui: PlayerUi
 @onready var movementController: PlayerMovementController = $PlayerMovementController
 @onready var visionManager: VisionManager = $VisionManager
 @onready var weaponManager: WeaponManager = $WeaponManager
+@onready var playerHealthManager: PlayerHealthManager = $PlayerHealthManager
 
 
 
 func _ready() -> void:
 	if !is_multiplayer_authority(): return
-	
+	Global.clientPlayer = self
 	_instantiate_UI()
 	
 	weaponManager._equip_new_weapon(Global.WEAPON_ID.AK_47)

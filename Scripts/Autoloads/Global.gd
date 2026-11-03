@@ -14,10 +14,28 @@ enum WEAPON_ID {
 	AK_47,
 	P90,
 	MP5,
+	AR_15,
+	MK_12,
 	SMG12 = 1000,
 	DEAGLE,
+	M191,
 	
 }
+
+const primaryWeapons: Array[WEAPON_ID] = [
+	WEAPON_ID.AK_47,
+	WEAPON_ID.P90,
+	WEAPON_ID.MP5,
+	WEAPON_ID.MK_12,
+	WEAPON_ID.AR_15,
+]
+
+const secondaryWeapons: Array[WEAPON_ID] = [
+	WEAPON_ID.DEAGLE ,
+	WEAPON_ID.SMG12 ,
+	WEAPON_ID.M191 ,
+	#WEAPON_ID. ,
+]
 
 var levels: Dictionary[MAPS, PackedScene]
 var weaponData: Dictionary[WEAPON_ID, WeaponData]
@@ -25,9 +43,9 @@ var weaponData: Dictionary[WEAPON_ID, WeaponData]
 var PlayerStartingHealth: float = 100
 var mouseSens: float = 0.002
 
-var root: Node 
+var gameController: GameController 
 var commandHandler: CommandHandler
-
+var clientPlayer: Player	
 
 func _ready() -> void:
 	levels = { 
