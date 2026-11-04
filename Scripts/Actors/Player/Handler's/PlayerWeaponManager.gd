@@ -24,7 +24,7 @@ var weaponData: WeaponData
 
 var fireMode: WEAPON_BEHAVIOR
 var reloadType: RELOAD_TYPE
-var weaponId: Global.WEAPON_ID
+var weaponId: Enum.WEAPON_ID
 var weaponName: String
 
 var maxRange: float = 100.0
@@ -49,7 +49,7 @@ var isShootReleased: bool = false
 var reloadTimer: Timer
 var fireTimer: Timer
 
-func _equip_new_weapon(newWeapon : Global.WEAPON_ID) -> void:
+func _equip_new_weapon(newWeapon : Enum.WEAPON_ID) -> void:
 	if !multiplayer.is_server():
 		server_update_equipped_weapon.rpc_id(1, newWeapon)
 	
@@ -58,11 +58,11 @@ func _equip_new_weapon(newWeapon : Global.WEAPON_ID) -> void:
 	load_weapon_data()
 	
 	if multiplayer.is_server():
-		print(Global.WEAPON_ID.find_key(newWeapon))
+		print(Enum.WEAPON_ID.find_key(newWeapon))
 	
 
 @rpc("any_peer", "call_remote", "reliable")
-func server_update_equipped_weapon(newWeapon : Global.WEAPON_ID) -> void:
+func server_update_equipped_weapon(newWeapon : Enum.WEAPON_ID) -> void:
 	_equip_new_weapon(newWeapon)
 
 func load_weapon_data() -> void:

@@ -14,7 +14,7 @@ class_name WeaponData extends Resource
 @export var loadedAmmo: int
 
 @export_subgroup("Enum's")
-@export var weaponGlobalId: Global.WEAPON_ID
+@export var weaponGlobalId: Enum.WEAPON_ID
 @export var fireMode: WeaponManager.WEAPON_BEHAVIOR
 @export var reloadType: WeaponManager.RELOAD_TYPE
 
@@ -35,14 +35,14 @@ var weaponDropOffDamage: float
 @export var meshRotation: Vector3
 
 
-static func get_weapon_damage(weaponId : Global.WEAPON_ID) -> float:
+static func get_weapon_damage(weaponId : Enum.WEAPON_ID) -> float:
 	var result: float = Global.weaponData[weaponId].damage
 	return result
 
-static func get_weapon_data(weaponId : Global.WEAPON_ID) -> WeaponData:
+static func get_weapon_data(weaponId : Enum.WEAPON_ID) -> WeaponData:
 	var result: WeaponData = Global.weaponData[weaponId]
 	return result
 
-static func get_weapon_reload_time(weaponId : Global.WEAPON_ID) -> float:
+static func get_weapon_reload_time(weaponId : Enum.WEAPON_ID) -> float:
 	var result: float = Global.weaponData[weaponId].reloadSpeed
 	return result

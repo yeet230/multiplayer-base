@@ -12,15 +12,17 @@ func _ready() -> void:
 
 
 func _on_host_pressed() -> void:
-	MultiplayerManager.start_server({})
+	pass
+	
+	#MultiplayerManager.start_server({})
 
 func _auto_mode_set() -> void:
 	if OS.has_feature("dedicated_server"):
 		print("Starting Dedicated Server Automaticlly")
 		push_warning("I am the server")
 		var data: Dictionary = {
-			MultiplayerManager.SERVER_DATA.LEVEL : Global.MAPS.DEV,
-			MultiplayerManager.SERVER_DATA.PORT : MultiplayerManager.SERVER_PORT,
+			Enum.SERVER_DATA.LEVEL : Enum.MAPS.DEV,
+			Enum.SERVER_DATA.PORT : MultiplayerManager.SERVER_PORT,
 		}
 		
 		MultiplayerManager.start_server.call_deferred(data)

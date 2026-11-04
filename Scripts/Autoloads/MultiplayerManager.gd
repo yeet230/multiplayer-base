@@ -2,43 +2,18 @@ extends Node
 
 @warning_ignore_start("unused_signal")
 
-signal serverSettingsConfirmed(level : Global.MAPS)
+signal serverSettingsConfirmed(level : Enum.MAPS)
 signal chatRecieved(chat : String)
 signal updateSharedPlayerData(data : Dictionary)
 
 const SERVER_PORT: int = 39286
 
-enum SERVER_DATA {
-	LEVEL,
-	PORT,
-	SPAWN_PLAYER,
-	USED_USERNAMES,
-}
-
-enum PLAYER_DATA {
-	HEALTH,
-	KILLS,
-	DEATHS,
-	SCORE,
-	AMMO,
-	USERNAME,
-	LIFE_ID,
-	PRIMARY_WEAPON,
-	SECONDARY_WEAPON,
-	GADGET,
-	ABILITY,
-	ACTIVE_WEAPON,
-}
-
 var serverDamageMulti: float = 1.0
 var commandStarter: String 
 var serverStoredPlayerData: Dictionary[int, Dictionary]
-var serverData: Dictionary[SERVER_DATA, Variant]
-
-#@onready var gameController: Node = Global.gameController
+var serverData: Dictionary[Enum.SERVER_DATA, Variant]
 
 func _ready() -> void:
-	#push_warning("i am the server :0")
 	multiplayer.peer_connected.connect(_server_handle_player_join)
 	multiplayer.peer_disconnected.connect(_server_handle_player_leave)
 	pass
@@ -50,21 +25,21 @@ func get_player_from_id(playerId : int) -> Player:
 			return player
 	return null
 
-func get_player_weapon(playerId : int) -> Global.WEAPON_ID:
-	var result:Global.WEAPON_ID = serverStoredPlayerData[playerId][PLAYER_DATA.ACTIVE_WEAPON]
+func get_player_weapon(playerId : int) -> Enum.WEAPON_ID:
+	var result: Enum.WEAPON_ID = serverStoredPlayerData[playerId][Enum.PLAYER_DATA.ACTIVE_WEAPON]
 	return result
 
 func get_player_health(playerId : int) -> float:
-	var result: float = serverStoredPlayerData[playerId][PLAYER_DATA.HEALTH]
+	var result: float = serverStoredPlayerData[playerId][Enum.PLAYER_DATA.HEALTH]
 	return result
 
 func start_server(data : Dictionary) -> void:
 	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	var err: Error = peer.create_server(SERVER_PORT)
-	var level: Global.MAPS = data[SERVER_DATA.LEVEL]
+	var level: Enum.MAPS = data[Enum.SERVER_DATA.LEVEL]
 	
 	if err != OK:
-		var errCode: Global.ERROR_CODES = Global.ERROR_CODES.ERR_FAILED_TO_START_SERVER
+		var errCode: Enum.ERROR_CODES = Enum.ERROR_CODES.ERR_FAILED_TO_START_SERVER
 		Global.throw_error(errCode, "%s" % err)
 		return
 	
@@ -90,9 +65,9 @@ func join_server(ip : String) -> void:
 
 func create_player_data(peerId : int) -> void:
 	serverStoredPlayerData[peerId] = {
-		PLAYER_DATA.HEALTH : 100,
-		PLAYER_DATA.LIFE_ID : 0,
-		PLAYER_DATA.ACTIVE_WEAPON : Global.WEAPON_ID.AK_47
+		Enum.PLAYER_DATA.HEALTH : 100,
+		Enum.PLAYER_DATA.LIFE_ID : 0,
+		Enum.PLAYER_DATA.ACTIVE_WEAPON : Enum.WEAPON_ID.AK_47
 	}
 
 
@@ -111,16 +86,16 @@ func _server_handle_player_leave(peerId : int) -> void:
 	
 	serverStoredPlayerData.erase(peerId)
 
-func set_player_server_data(playerId : int, newValue : Variant, key : PLAYER_DATA) -> void:
+func set_player_server_data(playerId : int, newValue : Variant, key : Enum.PLAYER_DATA) -> void:
 	serverStoredPlayerData[playerId][key] = newValue
 
 func _handle_player_hit(shootingPlayerId : int, hitPlayerId : int) -> void:
-	var weapon: Global.WEAPON_ID = get_player_weapon(shootingPlayerId)
+	var weapon: Enum.WEAPON_ID = get_player_weapon(shootingPlayerId)
 	var weaponDamage: float = WeaponData.get_weapon_damage(weapon)
 	var hitPlayerCurHealth: float = get_player_health(hitPlayerId)
 	var hitPlayerNewHealth: float = hitPlayerCurHealth - (weaponDamage * serverDamageMulti)
 	
-	set_player_server_data(hitPlayerId, hitPlayerNewHealth, PLAYER_DATA.HEALTH)
+	set_player_server_data(hitPlayerId, hitPlayerNewHealth, Enum.PLAYER_DATA.HEALTH)
 	update_health.rpc_id(hitPlayerId, hitPlayerNewHealth)
 
 @rpc("any_peer", "call_remote", "reliable")
@@ -148,7 +123,7 @@ func server_handle_hit() -> void:
 @rpc("any_peer", "call_remote", "reliable")
 func player_reload() -> void:
 	var playerId: int = multiplayer.get_remote_sender_id()
-	var weaponId: Global.WEAPON_ID = get_player_weapon(playerId)
+	var weaponId: Enum.WEAPON_ID = get_player_weapon(playerId)
 	var reloadTime: float = WeaponData.get_weapon_reload_time(weaponId)
 	
 	

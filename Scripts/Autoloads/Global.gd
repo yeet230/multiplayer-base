@@ -1,44 +1,22 @@
 extends Node
 
-enum ERROR_CODES {
-	ERR_FAILED_TO_START_SERVER,
-	ERR_,
-}
-
-enum MAPS {
-	DEV,
-	MAIN
-}
-
-enum WEAPON_ID {
-	AK_47,
-	P90,
-	MP5,
-	AR_15,
-	MK_12,
-	SMG12 = 1000,
-	DEAGLE,
-	M191,
-	
-}
-
-const primaryWeapons: Array[WEAPON_ID] = [
-	WEAPON_ID.AK_47,
-	WEAPON_ID.P90,
-	WEAPON_ID.MP5,
-	WEAPON_ID.MK_12,
-	WEAPON_ID.AR_15,
+const primaryWeapons: Array[Enum.WEAPON_ID] = [
+	Enum.WEAPON_ID.AK_47,
+	Enum.WEAPON_ID.P90,
+	Enum.WEAPON_ID.MP5,
+	Enum.WEAPON_ID.MK_12,
+	Enum.WEAPON_ID.AR_15,
 ]
 
-const secondaryWeapons: Array[WEAPON_ID] = [
-	WEAPON_ID.DEAGLE ,
-	WEAPON_ID.SMG12 ,
-	WEAPON_ID.M191 ,
-	#WEAPON_ID. ,
+const secondaryWeapons: Array[Enum.WEAPON_ID] = [
+	Enum.WEAPON_ID.DEAGLE ,
+	Enum.WEAPON_ID.SMG12 ,
+	Enum.WEAPON_ID.M191 ,
+	#Enum.WEAPON_ID. ,
 ]
 
-var levels: Dictionary[MAPS, PackedScene]
-var weaponData: Dictionary[WEAPON_ID, WeaponData]
+var levels: Dictionary[Enum.MAPS, PackedScene]
+var weaponData: Dictionary[Enum.WEAPON_ID, WeaponData]
 
 var PlayerStartingHealth: float = 100
 var mouseSens: float = 0.002
@@ -49,24 +27,24 @@ var clientPlayer: Player
 
 func _ready() -> void:
 	levels = { 
-		MAPS.DEV : preload("res://Scenes/3D/Levels/Dev/Dev.tscn"),
-		MAPS.MAIN : preload("res://Scenes/3D/Levels/LevelOne.tscn"),
+		Enum.MAPS.DEV : preload("res://Scenes/3D/Levels/Dev/Dev.tscn"),
+		Enum.MAPS.MAIN : preload("res://Scenes/3D/Levels/LevelOne.tscn"),
 	}
 	
 	weaponData = {
-		WEAPON_ID.AK_47 : preload("res://Resources/Weapon System/Primary/ak_47.tres"),
+		Enum.WEAPON_ID.AK_47 : preload("res://Resources/Weapon System/Primary/ak_47.tres"),
 	}
 	
 
 
-func get_level(levelId : MAPS) -> PackedScene:
+func get_level(levelId : Enum.MAPS) -> PackedScene:
 	var result: PackedScene = levels[levelId]
 	return result
 
 
 
-func throw_error(errCode : ERROR_CODES, text : String = "") -> void:
-	var errorKey: String = str(ERROR_CODES.find_key(errCode))
+func throw_error(errCode : Enum.ERROR_CODES, text : String = "") -> void:
+	var errorKey: String = str(Enum.ERROR_CODES.find_key(errCode))
 	var formattedString: String = str(errorKey, " : ", errCode, "\n", text )
 	assert(false, formattedString)
 

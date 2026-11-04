@@ -1,0 +1,45 @@
+class_name Enum extends Node
+
+enum SERVER_DATA {
+	LEVEL,
+	PORT,
+	SPAWN_PLAYER,
+	USED_USERNAMES,
+}
+
+enum PLAYER_DATA {
+	HEALTH,
+	KILLS,
+	DEATHS,
+	SCORE,
+	AMMO,
+	USERNAME,
+	LIFE_ID,
+	PRIMARY_WEAPON,
+	SECONDARY_WEAPON,
+	GADGET,
+	ABILITY,
+	ACTIVE_WEAPON,
+}
+
+enum ERROR_CODES {
+	ERR_FAILED_TO_START_SERVER,
+	ERR_,
+}
+
+enum MAPS {
+	DEV,
+	MAIN
+}
+
+enum WEAPON_ID {
+	AK_47,
+	P90,
+	MP5,
+	AR_15,
+	MK_12,
+	SMG12 = 1000,
+	DEAGLE,
+	M191,
+	
+}

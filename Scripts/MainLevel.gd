@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 
 
-func spawn_level(newLevel : Global.MAPS) -> void:
+func spawn_level(newLevel : Enum.MAPS) -> void:
 	_destroy_current_level()
 	_spawn_new_level(newLevel)
 	print("Level Spawned")
@@ -24,7 +24,7 @@ func _destroy_current_level() -> void:
 	for child in %LevelContainer.get_children():
 		child.queue_free()
 
-func _spawn_new_level(newLevel : Global.MAPS = Global.MAPS.DEV) -> void:
+func _spawn_new_level(newLevel : Enum.MAPS = Enum.MAPS.DEV) -> void:
 	var levelScene: PackedScene = Global.get_level(newLevel)
 	%LevelContainer.add_child(levelScene.instantiate())
 	

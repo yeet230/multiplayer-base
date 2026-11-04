@@ -15,7 +15,7 @@ func _ready() -> void:
 	Global.clientPlayer = self
 	_instantiate_UI()
 	
-	weaponManager._equip_new_weapon(Global.WEAPON_ID.AK_47)
+	weaponManager._equip_new_weapon(Enum.WEAPON_ID.AK_47)
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return

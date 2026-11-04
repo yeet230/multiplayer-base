@@ -11,7 +11,10 @@ script = ExtResource("1_i26rj")
 
 [node name="MenuItems" type="CanvasLayer" parent="." unique_id=1925073819]
 
-[node name="Menu" type="Control" parent="MenuItems" unique_id=1640040799]
+[node name="ClientMenu" parent="MenuItems" unique_id=484369215 instance=ExtResource("2_eiy7p")]
+visible = false
+
+[node name="MainMenu" type="Control" parent="MenuItems" unique_id=1640040799]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_0nft5")
 
-[node name="MainMenu" type="VBoxContainer" parent="MenuItems/Menu" unique_id=696036975]
+[node name="MainMenuVBox" type="VBoxContainer" parent="MenuItems/MainMenu" unique_id=696036975]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,35 +37,28 @@ offset_bottom = 75.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="MenuItems/Menu/MainMenu" unique_id=279220662]
+[node name="Play" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=279220662]
 layout_mode = 2
 text = "Play"
 
-[node name="Host" type="Button" parent="MenuItems/Menu/MainMenu" unique_id=418394136]
+[node name="Host" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=418394136]
 layout_mode = 2
 text = "Host"
 
-[node name="GameSettings" type="Button" parent="MenuItems/Menu/MainMenu" unique_id=1149132878]
+[node name="GameSettings" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=1149132878]
 layout_mode = 2
 text = "Game Settings"
 
-[node name="QuickJoin" type="Button" parent="MenuItems/Menu/MainMenu" unique_id=1839017426]
+[node name="QuickJoin" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=1839017426]
 layout_mode = 2
 text = "DevLevel"
 
-[node name="Quit" type="Button" parent="MenuItems/Menu/MainMenu" unique_id=1955174501]
+[node name="Quit" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=1955174501]
 layout_mode = 2
 text = "Quit
 "
 
-[node name="ClientMenu" parent="MenuItems/Menu" unique_id=484369215 instance=ExtResource("2_eiy7p")]
-visible = false
-layout_mode = 1
-
-[node name="OptionButton" type="OptionButton" parent="MenuItems" unique_id=31367981]
-item_count = 1
-popup/item_0/id = 0
-
-[connection signal="pressed" from="MenuItems/Menu/MainMenu/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MenuItems/Menu/MainMenu/QuickJoin" to="." method="_on_quick_join_pressed"]
-[connection signal="pressed" from="MenuItems/Menu/MainMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/QuickJoin" to="." method="_on_quick_join_pressed"]
+[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Quit" to="." method="_on_quit_pressed"]
