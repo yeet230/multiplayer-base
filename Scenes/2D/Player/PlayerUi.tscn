@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c17k7gp4p6q3h" path="res://Scripts/Actors/Player/PlayerUi.gd" id="1_uc6jw"]
 [ext_resource type="PackedScene" uid="uid://mn58j4guba4j" path="res://Scenes/2D/Player/playerCommandUI.tscn" id="2_12qdn"]
 [ext_resource type="Shader" uid="uid://y32m2qedmwcg" path="res://Shaders/HealthBar.gdshader" id="3_to7aa"]
+[ext_resource type="Texture2D" uid="uid://b13e00m35jdc7" path="res://Assets/2D/im-in-godot-ui-hell-v0-1fwuwk45aayh1.webp" id="4_n6exp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6exp"]
 shader = ExtResource("3_to7aa")
@@ -70,3 +71,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]
+
+[node name="ImInGodotUiHellV01Fwuwk45Aayh1" type="Sprite2D" parent="." unique_id=10002254]
+position = Vector2(569, 288)
+texture = ExtResource("4_n6exp")
