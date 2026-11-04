@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2yrx0eq5vatf"]
 
 [ext_resource type="Script" uid="uid://bsf80h6bm1j6m" path="res://Scripts/MainLevel.gd" id="1_rschu"]
-[ext_resource type="PackedScene" uid="uid://bpblj5osn52mf" path="res://Scenes/2D/Menu's/Main/MainMenu.tscn" id="2_g2nft"]
+[ext_resource type="PackedScene" uid="uid://bpblj5osn52mf" path="res://Scenes/2D/Menu's/MainMenu.tscn" id="2_g2nft"]
 [ext_resource type="Script" uid="uid://byhc10uvgpset" path="res://Scripts/Custom Nodes/CommandSystem.gd" id="3_g2nft"]
 
 [node name="GameController" type="Node" unique_id=1913640834]

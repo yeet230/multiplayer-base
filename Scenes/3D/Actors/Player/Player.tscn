@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cunyxs3eya22j"]
 
-[ext_resource type="Script" uid="uid://bsb5aky4ks3a7" path="res://Scripts/Charecters/Player/BasicPlayerController.gd" id="1_nq4pf"]
-[ext_resource type="Script" uid="uid://citafdrb7wy4s" path="res://Scripts/Charecters/Player/Handler's/InputHandler.gd" id="2_phrvb"]
-[ext_resource type="Script" uid="uid://bd4yrrb6w6vb4" path="res://Scripts/Charecters/Player/Handler's/PlayerMovmentController.gd" id="3_lk4yj"]
-[ext_resource type="Script" uid="uid://cqrprdyognihs" path="res://Scripts/VisionManager.gd" id="4_lk4yj"]
-[ext_resource type="Script" uid="uid://clr3uhptb0bq4" path="res://Scripts/Charecters/Player/Handler's/WeaponManager.gd" id="4_urwc2"]
-[ext_resource type="Script" uid="uid://dfx1o75paot3l" path="res://Scripts/Charecters/Player/Handler's/PlayerHealthManager.gd" id="5_xkto7"]
+[ext_resource type="Script" uid="uid://bsb5aky4ks3a7" path="res://Scripts/Actors/Player/PlayerController.gd" id="1_nq4pf"]
+[ext_resource type="Script" uid="uid://citafdrb7wy4s" path="res://Scripts/Actors/Player/Handler's/PlayerInputHandler.gd" id="2_phrvb"]
+[ext_resource type="Script" uid="uid://bd4yrrb6w6vb4" path="res://Scripts/Actors/Player/Handler's/PlayerMovmentController.gd" id="3_lk4yj"]
+[ext_resource type="Script" uid="uid://cqrprdyognihs" path="res://Scripts/Actors/Player/Handler's/PlayerVisionManager.gd" id="4_lk4yj"]
+[ext_resource type="Script" uid="uid://clr3uhptb0bq4" path="res://Scripts/Actors/Player/Handler's/PlayerWeaponManager.gd" id="4_urwc2"]
+[ext_resource type="Script" uid="uid://dfx1o75paot3l" path="res://Scripts/Actors/Player/Handler's/PlayerHealthManager.gd" id="5_xkto7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7fu1"]
 

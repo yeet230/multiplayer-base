@@ -54,7 +54,7 @@ func _equip_new_weapon(newWeapon : Global.WEAPON_ID) -> void:
 		server_update_equipped_weapon.rpc_id(1, newWeapon)
 	
 	isShootPressed = false
-	weaponData = Global.get_weapon_data(newWeapon)
+	weaponData = WeaponData.get_weapon_data(newWeapon)
 	load_weapon_data()
 	
 	if multiplayer.is_server():
@@ -70,7 +70,7 @@ func load_weapon_data() -> void:
 	loadedCount = weaponData.loadedAmmo
 	magSize = weaponData.magSize
 	weaponName = weaponData.weaponName
-	weaponId = weaponData.weaponId
+	weaponId = weaponData.weaponGlobalId
 	fireMode = weaponData.fireMode
 	reloadType = weaponData.reloadType
 	maxRange = weaponData.shootDist

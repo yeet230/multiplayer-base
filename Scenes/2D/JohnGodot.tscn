@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://ctpei2acff7oj"]
+
+[ext_resource type="Texture2D" uid="uid://cowd68ija2pp0" path="res://icon.svg" id="1_0hodv"]
+
+[node name="Node" type="Node" unique_id=1026318045]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1325939981]
+position = Vector2(-3.499725, -216.5)
+scale = Vector2(0.375, 0.3515625)
+texture = ExtResource("1_0hodv")
+
+[node name="Icon4" type="Sprite2D" parent="." unique_id=765157204]
+position = Vector2(-3.4997559, -102.0625)
+scale = Vector2(0.8847656, 1.5087892)
+texture = ExtResource("1_0hodv")
+
+[node name="Icon5" type="Sprite2D" parent="." unique_id=763201497]
+position = Vector2(93.500244, -135.49997)
+rotation = -0.7842264
+scale = Vector2(0.14550787, 0.9497071)
+texture = ExtResource("1_0hodv")
+
+[node name="Icon6" type="Sprite2D" parent="." unique_id=1163758874]
+position = Vector2(-104.49982, -133.50003)
+rotation = 0.78365284
+scale = Vector2(0.14550787, 0.9497071)
+texture = ExtResource("1_0hodv")
+
+[node name="Icon2" type="Sprite2D" parent="." unique_id=1918552002]
+position = Vector2(-42.499756, 52.5)
+scale = Vector2(0.1953125, 1)
+texture = ExtResource("1_0hodv")
+
+[node name="Icon3" type="Sprite2D" parent="." unique_id=1777446304]
+position = Vector2(36.500244, 53.5)
+scale = Vector2(0.1953125, 1)
+texture = ExtResource("1_0hodv")

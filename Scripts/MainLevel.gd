@@ -27,13 +27,12 @@ func _destroy_current_level() -> void:
 func _spawn_new_level(newLevel : Global.MAPS = Global.MAPS.DEV) -> void:
 	var levelScene: PackedScene = Global.get_level(newLevel)
 	%LevelContainer.add_child(levelScene.instantiate())
-	pass
+	
 
 @rpc("authority", "call_remote", "reliable")
 func request_bullet_decal_spawn(position : Vector3, normal : Vector3, parentPath : NodePath) -> void:
 	_spawn_bullet_decal(position, normal, parentPath)
-	
-	
+
 
 func _spawn_bullet_decal(position : Vector3, normal : Vector3, parentPath : NodePath) -> void:
 	print("Spawning Decal as ", "Server" if multiplayer.is_server() else "Client")

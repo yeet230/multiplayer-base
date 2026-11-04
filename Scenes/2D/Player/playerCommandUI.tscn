@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mn58j4guba4j"]
 
-[ext_resource type="Script" uid="uid://bt1mqkrypej81" path="res://PlayerUICommandHandler.gd" id="1_kuext"]
+[ext_resource type="Script" uid="uid://bt1mqkrypej81" path="res://Scripts/Actors/Player/Handler's/PlayerUICommandHandler.gd" id="1_kuext"]
 
 [sub_resource type="Theme" id="Theme_g7fu1"]
 

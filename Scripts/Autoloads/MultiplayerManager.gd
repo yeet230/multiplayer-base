@@ -2,7 +2,7 @@ extends Node
 
 @warning_ignore_start("unused_signal")
 
-signal serverSettingsConfirmed()
+signal serverSettingsConfirmed(level : Global.MAPS)
 signal chatRecieved(chat : String)
 signal updateSharedPlayerData(data : Dictionary)
 
@@ -13,8 +13,6 @@ enum SERVER_DATA {
 	PORT,
 	SPAWN_PLAYER,
 	USED_USERNAMES,
-	
-	
 }
 
 enum PLAYER_DATA {
@@ -30,9 +28,9 @@ enum PLAYER_DATA {
 	GADGET,
 	ABILITY,
 	ACTIVE_WEAPON,
-	
 }
 
+var serverDamageMulti: float = 1.0
 var commandStarter: String 
 var serverStoredPlayerData: Dictionary[int, Dictionary]
 var serverData: Dictionary[SERVER_DATA, Variant]
@@ -56,19 +54,23 @@ func get_player_weapon(playerId : int) -> Global.WEAPON_ID:
 	var result:Global.WEAPON_ID = serverStoredPlayerData[playerId][PLAYER_DATA.ACTIVE_WEAPON]
 	return result
 
-func start_server(_data : Dictionary) -> void:
+func get_player_health(playerId : int) -> float:
+	var result: float = serverStoredPlayerData[playerId][PLAYER_DATA.HEALTH]
+	return result
+
+func start_server(data : Dictionary) -> void:
 	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	var err: Error = peer.create_server(SERVER_PORT)
+	var level: Global.MAPS = data[SERVER_DATA.LEVEL]
 	
 	if err != OK:
 		var errCode: Global.ERROR_CODES = Global.ERROR_CODES.ERR_FAILED_TO_START_SERVER
 		Global.throw_error(errCode, "%s" % err)
-		#push_error("Failed to create server: %s" % err)
 		return
 	
 	multiplayer.multiplayer_peer = peer
 	commandStarter = Global.create_command_starter()
-	serverSettingsConfirmed.emit()
+	serverSettingsConfirmed.emit(level)
 	
 	print("Server started on port ", SERVER_PORT)
 	print("Command starter: ", commandStarter)
@@ -109,20 +111,22 @@ func _server_handle_player_leave(peerId : int) -> void:
 	
 	serverStoredPlayerData.erase(peerId)
 
+func set_player_server_data(playerId : int, newValue : Variant, key : PLAYER_DATA) -> void:
+	serverStoredPlayerData[playerId][key] = newValue
 
 func _handle_player_hit(shootingPlayerId : int, hitPlayerId : int) -> void:
-	var hitPlayer: Player = get_player_from_id(hitPlayerId)
 	var weapon: Global.WEAPON_ID = get_player_weapon(shootingPlayerId)
-	var weaponDamage: float = Global.get_weapon_damage(weapon)
+	var weaponDamage: float = WeaponData.get_weapon_damage(weapon)
+	var hitPlayerCurHealth: float = get_player_health(hitPlayerId)
+	var hitPlayerNewHealth: float = hitPlayerCurHealth - (weaponDamage * serverDamageMulti)
 	
-	update_health.rpc_id(hitPlayerId, 20)
+	set_player_server_data(hitPlayerId, hitPlayerNewHealth, PLAYER_DATA.HEALTH)
+	update_health.rpc_id(hitPlayerId, hitPlayerNewHealth)
 
 @rpc("any_peer", "call_remote", "reliable")
 func server_handle_hit() -> void:
 	var senderId: int = multiplayer.get_remote_sender_id()
 	var player: Player = get_player_from_id(senderId)
-	#var playerWeapon: Global.WEAPON_ID = get_player_weapon(senderId)
-	
 	var results: Dictionary = player.weaponManager.perform_hitscan()
 	
 	if results.is_empty(): return
@@ -142,12 +146,19 @@ func server_handle_hit() -> void:
 	#print("Server Weapon HitScan Results: ", results)
 
 @rpc("any_peer", "call_remote", "reliable")
+func player_reload() -> void:
+	var playerId: int = multiplayer.get_remote_sender_id()
+	var weaponId: Global.WEAPON_ID = get_player_weapon(playerId)
+	var reloadTime: float = WeaponData.get_weapon_reload_time(weaponId)
+	
+	
+	await get_tree().create_timer(reloadTime - 0.5).timeout
+	
+	
+	
 
-func _update_player_health(playerId : int) -> void:
-	pass
-
-
-##Please do not remove this 🥺🥺
+##Please do not remove this
+##Otherwise the server will crash 🥺🥺🥺
 @rpc("authority", "call_remote", "reliable")
 func update_health(newHealth : float) -> void:
 	Global.clientPlayer.playerHealthManager.update_health(newHealth)

@@ -70,13 +70,6 @@ func throw_error(errCode : ERROR_CODES, text : String = "") -> void:
 	var formattedString: String = str(errorKey, " : ", errCode, "\n", text )
 	assert(false, formattedString)
 
-func get_weapon_data(weaponId : WEAPON_ID) -> WeaponData:
-	var result: WeaponData = weaponData[weaponId]
-	return result
-
-func get_weapon_damage(weponId : WEAPON_ID) -> float:
-	var result: float = weaponData[weponId].damage
-	return result
 
 #func get_user_current_weapon() -> Weapon:
 
