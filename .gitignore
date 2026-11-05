@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+Scenes/2D/Player/PlayerUi.tscn2609842757.tmp

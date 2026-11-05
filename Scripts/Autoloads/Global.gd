@@ -23,7 +23,7 @@ var mouseSens: float = 0.002
 
 var gameController: GameController 
 var commandHandler: CommandHandler
-var clientPlayer: Player	
+var clientPlayer: Player
 
 func _ready() -> void:
 	levels = { 

@@ -18,7 +18,8 @@ func _ready() -> void:
 	
 	
 
-
+func log_text(text: String, colour : Color) -> void:
+	UIHandler.log_text(text, colour)
 
 #
 func register_command(command_name: PackedStringArray, ClientSideCallable: Callable, serverSideCallable : Callable = Callable()) -> void:
@@ -38,22 +39,29 @@ func get_command_arg_count(command : String) -> int:
 	var result: int = clientCommands[command].get_argument_count()
 	return result
 
+func does_command_have_args(command : String) -> bool:
+	var argCount: int = clientCommands[command].get_argument_count()
+	var result = true if argCount >= 1 else false
+	return result
+
 
 func call_command(command : String, args : PackedStringArray) -> void:
-	clientCommands[command].call(args)
-	
+	if does_command_have_args(command):
+		clientCommands[command].call(args)
+	else:
+		clientCommands[command].call()
 
 
 #region Commands
 
 func _command_help() -> void:
 	if multiplayer.is_server():
-		pass
+		return
 	else:
 		pass
-		#log_text("Available commands: \n(Aliases are listed on the same row)", Color.CYAN)
-		#for cmd in cmdAliases:
-			#log_text("- " + cmd, Color.CYAN)
+		log_text("Available commands: \n(Aliases are listed on the same row)", Color.CYAN)
+		for cmd in cmdAliases:
+			log_text("- " + cmd, Color.CYAN)
 #
 #
 func _command_player_teleport(_args : PackedStringArray) -> void:

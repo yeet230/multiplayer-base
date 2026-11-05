@@ -9,7 +9,6 @@ var ui: PlayerUi
 @onready var playerHealthManager: PlayerHealthManager = $PlayerHealthManager
 
 
-
 func _ready() -> void:
 	if !is_multiplayer_authority(): return
 	Global.clientPlayer = self

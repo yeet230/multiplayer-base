@@ -12,6 +12,11 @@ func _ready() -> void:
 	Global.commandHandler.UIHandler = self
 	
 
+func toggle() -> void:
+	visible = !visible
+	consoleInput.grab_focus(!visible)
+	consoleInput.clear()
+
 func _update_log() -> void:
 	pass
 

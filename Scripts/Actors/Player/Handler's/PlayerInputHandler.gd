@@ -22,12 +22,15 @@ var isPrimaryPressed: bool = false
 var isSecondaryPressed: bool = false
 var isMeleePressed: bool = false
 
+var commandToggle: bool = false
+
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
 	
 	if event is InputEventMouseMotion:
 		player.visionManager.look_around(event.relative)
-	#
+	elif event.is_action_pressed("toggle_command"):
+		Global.commandHandler.UIHandler.toggle()
 	#elif event is InputEventKey:
 		#if event.is_action_pressed("ui_cancel"):
 			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
