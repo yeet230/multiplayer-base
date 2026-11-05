@@ -73,5 +73,6 @@ size_flags_vertical = 8
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]
 
 [node name="ImInGodotUiHellV01Fwuwk45Aayh1" type="Sprite2D" parent="." unique_id=10002254]
+visible = false
 position = Vector2(569, 288)
 texture = ExtResource("4_n6exp")

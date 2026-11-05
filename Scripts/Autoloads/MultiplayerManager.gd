@@ -52,9 +52,9 @@ func start_server(data : Dictionary) -> void:
 	push_warning("I am Server!!")
 
 
-func join_server(ip : String) -> void:
+func join_server(ip : String, port : int = SERVER_PORT) -> void:
 	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-	var err: Error = peer.create_client(ip, SERVER_PORT)
+	var err: Error = peer.create_client(ip, port)
 	
 	if err != OK:
 		push_error("Failed to connect: %s" % err)
