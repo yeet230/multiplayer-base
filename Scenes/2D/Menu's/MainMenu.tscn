@@ -4,20 +4,21 @@
 [ext_resource type="Script" uid="uid://yv2w3la70h3r" path="res://Scripts/Menu's/MainMenu.gd" id="1_i26rj"]
 [ext_resource type="PackedScene" uid="uid://bwdt4nq8pr5ke" path="res://Scenes/2D/Menu's/ClientMenu.tscn" id="2_eiy7p"]
 [ext_resource type="PackedScene" uid="uid://d0okxry2sj1hu" path="res://Scenes/2D/Menu's/HostMenuSetup.tscn" id="4_neomk"]
+[ext_resource type="PackedScene" uid="uid://rnt3man7mim7" path="res://SystemMessage.tscn" id="5_favh5"]
 
-[node name="MainMenu" type="Node" unique_id=950782923]
-script = ExtResource("1_i26rj")
+[node name="MainMenu" type="Control" unique_id=2020584402]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="DisplayElements" type="CanvasLayer" parent="." unique_id=1055677627]
+[node name="DisplayElements" type="CanvasLayer" parent="." unique_id=1103258426]
 
-[node name="MenuItems" type="CanvasLayer" parent="." unique_id=1925073819]
+[node name="MenuItems" type="CanvasLayer" parent="." unique_id=1958911187]
 
-[node name="ClientMenu" parent="MenuItems" unique_id=484369215 instance=ExtResource("2_eiy7p")]
-unique_name_in_owner = true
-visible = false
-
-[node name="MainMenu" type="Control" parent="MenuItems" unique_id=1640040799]
-unique_name_in_owner = true
+[node name="MenuHandler" type="Control" parent="MenuItems" unique_id=1077537926]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,8 +26,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_0nft5")
+script = ExtResource("1_i26rj")
+metadata/_custom_type_script = "uid://yv2w3la70h3r"
 
-[node name="MainMenuVBox" type="VBoxContainer" parent="MenuItems/MainMenu" unique_id=696036975]
+[node name="ClientMenu" parent="MenuItems/MenuHandler" unique_id=484369215 instance=ExtResource("2_eiy7p")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="MainMenu" type="Control" parent="MenuItems/MenuHandler" unique_id=1422905097]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuVBox" type="VBoxContainer" parent="MenuItems/MenuHandler/MainMenu" unique_id=803509194]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -40,43 +58,44 @@ offset_bottom = 75.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=279220662]
+[node name="Play" type="Button" parent="MenuItems/MenuHandler/MainMenu/MainMenuVBox" unique_id=1330164931]
 layout_mode = 2
 text = "Play"
 
-[node name="Host" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=418394136]
+[node name="Host" type="Button" parent="MenuItems/MenuHandler/MainMenu/MainMenuVBox" unique_id=1201785767]
 layout_mode = 2
 text = "Host"
 
-[node name="GameSettings" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=1149132878]
+[node name="GameSettings" type="Button" parent="MenuItems/MenuHandler/MainMenu/MainMenuVBox" unique_id=1300302698]
 layout_mode = 2
 text = "Game Settings"
 
-[node name="QuickJoin" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=1839017426]
+[node name="QuickJoin" type="Button" parent="MenuItems/MenuHandler/MainMenu/MainMenuVBox" unique_id=981691344]
 layout_mode = 2
 text = "DevLevel"
 
-[node name="Quit" type="Button" parent="MenuItems/MainMenu/MainMenuVBox" unique_id=1955174501]
+[node name="Quit" type="Button" parent="MenuItems/MenuHandler/MainMenu/MainMenuVBox" unique_id=2074719396]
 layout_mode = 2
 text = "Quit
 "
 
-[node name="HostMenu" parent="MenuItems" unique_id=2097086261 instance=ExtResource("4_neomk")]
+[node name="HostMenu" parent="MenuItems/MenuHandler" unique_id=2097086261 instance=ExtResource("4_neomk")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 1
 
-[node name="Back" type="Button" parent="MenuItems" unique_id=769222520]
-visible = false
+[node name="Back" type="Button" parent="MenuItems/MenuHandler" unique_id=1347148991]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -8.0
-offset_right = 8.0
+offset_left = 4.0
+offset_top = -31.0
+offset_right = 53.0
+offset_bottom = -4.0
 grow_vertical = 0
 text = "Back"
 
-[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/QuickJoin" to="." method="_on_quick_join_pressed"]
-[connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="MenuItems/Back" to="." method="_on_back_pressed"]
+[node name="SystemMessage" parent="MenuItems/MenuHandler" unique_id=2107457494 instance=ExtResource("5_favh5")]
+visible = false
+layout_mode = 1

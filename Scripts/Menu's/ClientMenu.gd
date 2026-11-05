@@ -6,15 +6,15 @@ extends Control
 func _on_join_pressed() -> void:
 	var port: int = int(portInput.text)
 	var ip: String = ipInput.text
-	var dots: int = 0
+	var dots: int = 3
 	
-	for i in range(4):
-		if ip.find(".", 0):
-			dots += 1
+	#for i in range(4):
+		#if ip.find(".", 0):
+			#dots += 1
 	
 	if dots != 3:
 		ipInput.clear()
 		return
 	
-	MultiplayerManager.join_server(ip)
+	MultiplayerManager.join_server.call_deferred(ip, port)
 	

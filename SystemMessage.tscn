@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://rnt3man7mim7"]
+
+[ext_resource type="Script" uid="uid://dk2k5gnnh6pht" path="res://Scripts/Custom Nodes/SystemMessage.gd" id="1_jfi7j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfi7j"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="SystemMessage" type="Control" unique_id=2107457494]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jfi7j")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=561224443]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1882353, 0.1882353, 0.1882353, 0.6392157)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=941084270]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.5
+offset_top = -148.0
+offset_right = 186.5
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfi7j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=910262846]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 88
+
+[node name="Reason" type="Label" parent="PanelContainer/VBoxContainer" unique_id=50681199]
+layout_mode = 2
+theme_type_variation = &"GraphFrameTitleLabel"
+text = "You have been kicked"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Label" parent="PanelContainer/VBoxContainer" unique_id=173941957]
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"TooltipLabel"
+theme_override_font_sizes/font_size = 14
+text = "insert reason here"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=2079753996]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close"

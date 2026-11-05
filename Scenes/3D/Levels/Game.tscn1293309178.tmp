@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d2yrx0eq5vatf"]
+
+[ext_resource type="Script" uid="uid://bsf80h6bm1j6m" path="res://Scripts/MainLevel.gd" id="1_rschu"]
+[ext_resource type="PackedScene" uid="uid://bpblj5osn52mf" path="res://Scenes/2D/Menu's/MainMenu.tscn" id="2_g2nft"]
+[ext_resource type="Script" uid="uid://byhc10uvgpset" path="res://Scripts/Custom Nodes/CommandSystem.gd" id="3_g2nft"]
+
+[node name="GameController" type="Node" unique_id=1913640834]
+script = ExtResource("1_rschu")
+metadata/_custom_type_script = "uid://bsf80h6bm1j6m"
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="." unique_id=520298934]
+_spawnable_scenes = PackedStringArray("uid://ccvpekgqunofh", "uid://dsbs1ttk1ctpq")
+spawn_path = NodePath("../LevelContainer")
+
+[node name="CommandHandler" type="Node" parent="." unique_id=265917615]
+script = ExtResource("3_g2nft")
+metadata/_custom_type_script = "uid://byhc10uvgpset"
+
+[node name="LevelContainer" type="Node" parent="." unique_id=640235785]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="." unique_id=950782923 instance=ExtResource("2_g2nft")]
