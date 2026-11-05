@@ -48,7 +48,6 @@ func set_camera_current_if_necessary(player : Node):
 		var camera_3ds = player.find_children("*", "Camera3D")
 		if camera_3ds.size() > 0:
 			camera_3ds[0].current = true
-		print(camera_3ds)
 
 
 func add_player(id = 1):

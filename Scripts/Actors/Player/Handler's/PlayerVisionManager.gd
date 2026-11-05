@@ -36,7 +36,7 @@ func _handle_headbob(delta : float) -> void:
 		0
 	)
 
-func apply_recoil(amount : float) -> void:
+func apply_recoil(_amount : float) -> void:
 	pass
 
 func get_camera() -> Camera3D:

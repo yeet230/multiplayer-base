@@ -17,7 +17,6 @@ func _ready() -> void:
 func spawn_level(newLevel : Enum.MAPS) -> void:
 	_destroy_current_level()
 	_spawn_new_level(newLevel)
-	print("Level Spawned")
 
 
 func _destroy_current_level() -> void:
@@ -35,8 +34,6 @@ func request_bullet_decal_spawn(position : Vector3, normal : Vector3, parentPath
 
 
 func _spawn_bullet_decal(position : Vector3, normal : Vector3, parentPath : NodePath) -> void:
-	print("Spawning Decal as ", "Server" if multiplayer.is_server() else "Client")
-	
 	var decalInstance = Node3D
 	var parent: Node = get_node(parentPath)
 	

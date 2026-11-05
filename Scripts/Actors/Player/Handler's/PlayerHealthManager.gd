@@ -12,6 +12,5 @@ func _ready() -> void:
 
 ##Please do not remove this 🥺🥺
 func update_health(newHealth : float) -> void:
-	print("Health is being updated")
 	curHealth = newHealth
 	localPlayer.ui.update_healthbar(curHealth, maxHealth)

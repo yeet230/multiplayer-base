@@ -56,7 +56,7 @@ func _command_help() -> void:
 			#log_text("- " + cmd, Color.CYAN)
 #
 #
-func _command_player_teleport(args : PackedStringArray) -> void:
+func _command_player_teleport(_args : PackedStringArray) -> void:
 	pass
 	
 	#if args.size() != 3:
@@ -79,11 +79,11 @@ func _command_player_freecam() -> void:
 	#log_text("Player freecam is now: " + str("Active" if player.freecamActive else "Inactive"), Color.CYAN)
 
 
-func _command_give_player_weapon(args : PackedStringArray) -> void:
+func _command_give_player_weapon(_args : PackedStringArray) -> void:
 	pass
 
 
-func _command_set_player_health(args : PackedStringArray) -> void:
+func _command_set_player_health(_args : PackedStringArray) -> void:
 	pass
 
 

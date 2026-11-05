@@ -144,6 +144,9 @@ func _handle_hit_check() -> void:
 	
 	var collider: Node3D = result.get("collider")
 	
+	if collider is Player:
+		localPlayer.ui.hit_confirm()
+	
 	
 
 func setup_timers() -> void:

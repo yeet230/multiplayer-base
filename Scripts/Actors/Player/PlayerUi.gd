@@ -20,6 +20,7 @@ func update_ammo() -> void:
 
 func update_healthbar(newHealth : float, maxHealth) -> void:
 	var healthPercentage: float = (newHealth / maxHealth)
-	print("_update_health", healthPercentage)
 	healthBar.material.set_shader_parameter("value", healthPercentage)
-	
+
+func hit_confirm() -> void:
+	pass

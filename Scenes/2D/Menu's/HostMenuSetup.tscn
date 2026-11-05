@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://defv8fl3bnyrk" path="res://Scripts/Menu's/HostmenuSetup.gd" id="1_kv2et"]
 
-[node name="Control" type="Control" unique_id=2097086261]
+[node name="HostMenu" type="Control" unique_id=2097086261]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,15 +12,49 @@ grow_vertical = 2
 script = ExtResource("1_kv2et")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1954890131]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -60.5
+offset_right = 100.5
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Map" type="OptionButton" parent="VBoxContainer" unique_id=866651488]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1505377092]
 layout_mode = 2
 
-[node name="OptionButton2" type="OptionButton" parent="VBoxContainer" unique_id=1418073862]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1335412072]
 layout_mode = 2
+text = "Map: "
+
+[node name="Map" type="OptionButton" parent="VBoxContainer/HBoxContainer" unique_id=866651488]
+layout_mode = 2
+
+[node name="SpawnPlayerHBox" type="HBoxContainer" parent="VBoxContainer" unique_id=868133919]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/SpawnPlayerHBox" unique_id=1425906704]
+layout_mode = 2
+text = "Spawn Host Player: "
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/SpawnPlayerHBox" unique_id=1527696487]
+layout_mode = 2
+
+[node name="PortHBox" type="HBoxContainer" parent="VBoxContainer" unique_id=232911170]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PortHBox" unique_id=1821068242]
+layout_mode = 2
+text = "Port: "
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/PortHBox" unique_id=346612243]
+layout_mode = 2
+text = "39286"
 
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=1426162596]
 layout_mode = 2

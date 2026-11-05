@@ -8,6 +8,6 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for p in Global.primaryWeapons:
-		primary.add_item(Global.WEAPON_ID.find_key(p), p)
+		primary.add_item(Enum.WEAPON_ID.find_key(p), p)
 	
 	var itemCount = primary.item_count

@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://clmane4tnahtp" path="res://Resources/Menu's/MainMenu.tres" id="1_0nft5"]
 [ext_resource type="Script" uid="uid://yv2w3la70h3r" path="res://Scripts/Menu's/MainMenu.gd" id="1_i26rj"]
 [ext_resource type="PackedScene" uid="uid://bwdt4nq8pr5ke" path="res://Scenes/2D/Menu's/ClientMenu.tscn" id="2_eiy7p"]
+[ext_resource type="PackedScene" uid="uid://d0okxry2sj1hu" path="res://Scenes/2D/Menu's/HostMenuSetup.tscn" id="4_neomk"]
 
 [node name="MainMenu" type="Node" unique_id=950782923]
 script = ExtResource("1_i26rj")
@@ -12,9 +13,11 @@ script = ExtResource("1_i26rj")
 [node name="MenuItems" type="CanvasLayer" parent="." unique_id=1925073819]
 
 [node name="ClientMenu" parent="MenuItems" unique_id=484369215 instance=ExtResource("2_eiy7p")]
+unique_name_in_owner = true
 visible = false
 
 [node name="MainMenu" type="Control" parent="MenuItems" unique_id=1640040799]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +61,22 @@ layout_mode = 2
 text = "Quit
 "
 
+[node name="HostMenu" parent="MenuItems" unique_id=2097086261 instance=ExtResource("4_neomk")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Back" type="Button" parent="MenuItems" unique_id=769222520]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+text = "Back"
+
 [connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/QuickJoin" to="." method="_on_quick_join_pressed"]
 [connection signal="pressed" from="MenuItems/MainMenu/MainMenuVBox/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MenuItems/Back" to="." method="_on_back_pressed"]

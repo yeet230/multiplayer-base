@@ -11,23 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uia4m")
 
-[node name="TabContainer" type="TabContainer" parent="." unique_id=1163672538]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-current_tab = 0
-tab_0/title = "Join Server"
-tab_1/title = "Host Server"
-
-[node name="JoinServer" type="Label" parent="TabContainer" unique_id=853493337]
-layout_mode = 2
-metadata/_tab_index = 0
-metadata/_tab_name = "Join Server"
-
-[node name="MainVboxContainer" type="VBoxContainer" parent="TabContainer/JoinServer" unique_id=134869795]
+[node name="MainVboxContainer" type="VBoxContainer" parent="." unique_id=1220990968]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,42 +26,43 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/JoinServer/MainVboxContainer" unique_id=1967468820]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainVboxContainer" unique_id=12295519]
 layout_mode = 2
 theme_override_constants/separation = 36
 
-[node name="IpInput" type="LineEdit" parent="TabContainer/JoinServer/MainVboxContainer/VBoxContainer" unique_id=1491252586]
+[node name="IpInput" type="LineEdit" parent="MainVboxContainer/VBoxContainer" unique_id=286173403]
 layout_mode = 2
+text = "10.177."
 placeholder_text = "IP Here:"
+max_length = 15
+context_menu_enabled = false
+emoji_menu_enabled = false
+middle_mouse_paste_enabled = false
 
-[node name="Label" type="Label" parent="TabContainer/JoinServer/MainVboxContainer/VBoxContainer/IpInput" unique_id=1815083009]
+[node name="Label" type="Label" parent="MainVboxContainer/VBoxContainer/IpInput" unique_id=726145490]
 layout_mode = 1
 offset_top = -24.0
 offset_right = 40.0
 offset_bottom = -1.0
 text = "IP Address:"
 
-[node name="LineEdit" type="LineEdit" parent="TabContainer/JoinServer/MainVboxContainer/VBoxContainer" unique_id=1643990940]
+[node name="PortInput" type="LineEdit" parent="MainVboxContainer/VBoxContainer" unique_id=1400253865]
 layout_mode = 2
 text = "39286"
 placeholder_text = "Port: Defualt is 39286"
+max_length = 5
 
-[node name="Label" type="Label" parent="TabContainer/JoinServer/MainVboxContainer/VBoxContainer/LineEdit" unique_id=480593446]
+[node name="Label" type="Label" parent="MainVboxContainer/VBoxContainer/PortInput" unique_id=340429197]
 layout_mode = 0
 offset_top = -24.0
 offset_right = 40.0
 offset_bottom = -1.0
 text = "Port:"
 
-[node name="Join" type="Button" parent="TabContainer/JoinServer/MainVboxContainer" unique_id=1003973649]
+[node name="Join" type="Button" parent="MainVboxContainer" unique_id=1988387518]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Join Server"
 
-[node name="HostServer" type="Label" parent="TabContainer" unique_id=873292500]
-visible = false
-layout_mode = 2
-text = "Host Server"
-metadata/_tab_index = 1
-metadata/_tab_name = "Host Server"
+[connection signal="pressed" from="MainVboxContainer/Join" to="." method="_on_join_pressed"]
