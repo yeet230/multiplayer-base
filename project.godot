@@ -29,6 +29,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="Multiplayer-Base"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MP4Player/plugin.cfg")
+
 [file_customization]
 
 folder_colors={

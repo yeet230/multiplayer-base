@@ -15,9 +15,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 5
 
 [node name="General" type="Label" parent="TabContainer" unique_id=745793051]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -74,3 +75,22 @@ metadata/_tab_index = 4
 [node name="Label" type="Label" parent="TabContainer/Audio" unique_id=2144471931]
 layout_mode = 0
 text = "There's nothing here gng. how many times you need to be told ✌️😭"
+
+[node name="Accessibility" type="Label" parent="TabContainer" unique_id=2001926436]
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Accessibility" unique_id=1648011481]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AussiMode" type="HBoxContainer" parent="TabContainer/Accessibility/VBoxContainer" unique_id=919899638]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Accessibility/VBoxContainer/AussiMode" unique_id=819834610]
+layout_mode = 2
+text = "Aussdie Mode:"
+
+[node name="CheckButton" type="CheckButton" parent="TabContainer/Accessibility/VBoxContainer/AussiMode" unique_id=264249084]
+layout_mode = 2

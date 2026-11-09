@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://mn58j4guba4j" path="res://Scenes/2D/Player/playerCommandUI.tscn" id="2_12qdn"]
 [ext_resource type="Shader" uid="uid://y32m2qedmwcg" path="res://Shaders/HealthBar.gdshader" id="3_to7aa"]
 [ext_resource type="Texture2D" uid="uid://b13e00m35jdc7" path="res://Assets/2D/im-in-godot-ui-hell-v0-1fwuwk45aayh1.webp" id="4_n6exp"]
+[ext_resource type="Script" uid="uid://qrfv77io56w" path="res://addons/MP4Player/MP4VideoPlayer.gd" id="5_qqobp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6exp"]
 shader = ExtResource("3_to7aa")
@@ -76,3 +77,16 @@ layout_mode = 2
 visible = false
 position = Vector2(569, 288)
 texture = ExtResource("4_n6exp")
+
+[node name="MP4Player" type="MP4Player" parent="." unique_id=853866499]
+
+[node name="MP4VideoPlayer" type="Control" parent="." unique_id=519058684]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_qqobp")
+video_path = "res://Assets/2D/Documentry video (1).mp4"
+metadata/_custom_type_script = "uid://qrfv77io56w"
