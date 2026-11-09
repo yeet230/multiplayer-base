@@ -88,5 +88,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_qqobp")
-video_path = "res://Assets/2D/Documentry video (1).mp4"
+video_path = "res://vid.mp4"
 metadata/_custom_type_script = "uid://qrfv77io56w"
