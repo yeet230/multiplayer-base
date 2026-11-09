@@ -42,5 +42,6 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+keep_editing_on_text_submit = true
 
 [connection signal="text_submitted" from="ConsoleInput" to="." method="_on_console_input_text_submitted"]

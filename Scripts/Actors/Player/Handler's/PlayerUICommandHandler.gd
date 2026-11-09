@@ -26,6 +26,7 @@ func log_text(text: String, colour : Color) -> void:
 
 func _on_console_input_text_submitted(userCommand: String) -> void:
 	consoleInput.clear()
+	consoleInput.grab_focus()
 	previousInputs.push_front(userCommand)
 	index = -1
 	
@@ -51,10 +52,16 @@ func _on_console_input_text_submitted(userCommand: String) -> void:
 		var args : PackedStringArray = parts.slice(1)
 		Global.commandHandler.call_command(command, args)
 
-	
-	
-	
-	
-	#MultiplayerManager.handle_command(text)
-	
-	
+func cycle_up_command() -> void:
+	if previousInputs.is_empty(): return
+	index += 1
+	index = clampi(index, 0, previousInputs.size() - 1)
+	consoleInput.text = previousInputs[index]
+
+func cycle_down_command() -> void:
+	index -= 1
+	index = clampi(index, -1, previousInputs.size() - 1)
+	if index == -1:
+		consoleInput.clear()
+	else:
+		consoleInput.text = previousInputs[index]

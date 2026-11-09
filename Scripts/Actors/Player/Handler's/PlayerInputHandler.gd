@@ -31,6 +31,11 @@ func _input(event: InputEvent) -> void:
 		player.visionManager.look_around(event.relative)
 	elif event.is_action_pressed("toggle_command"):
 		Global.commandHandler.UIHandler.toggle()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("console_down"):
+		Global.commandHandler.UIHandler.cycle_down_command()
+	elif event.is_action_pressed("console_up"):
+		Global.commandHandler.UIHandler.cycle_up_command()
 	#elif event is InputEventKey:
 		#if event.is_action_pressed("ui_cancel"):
 			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
