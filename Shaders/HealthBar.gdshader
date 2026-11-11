@@ -1,4 +1,3 @@
-
 shader_type canvas_item;
 
 uniform bool stepify = true;
@@ -23,7 +22,7 @@ vec4 get_gradient_color(sampler2D src, float position) {
 float square_shape(vec2 uv, vec2 size) {
 	vec2 bl = step((1.0 - size) / 2.0, uv);
 	vec2 tr = step((1.0 - size) / 2.0, 1.0 - uv);
-
+	
 	return bl.x * bl.y * tr.x * tr.y;
 }
 
@@ -42,104 +41,74 @@ float map_range(float min1, float max1, float min2, float max2, float v) {
 vec3 hsv_to_rgb(vec3 color) {
 	vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 	vec3 p = abs(fract(color.xxx + K.xyz) * 6.0 - K.www);
+	
 	return color.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), color.y);
 }
 
 
 void fragment() {
 	vec2 uv = UV;
-
+	
 	// Shear
 	float angle = 1.571 + (shear_angle * PI / 4.0);
 	float shear_value = cos(angle) / sin(angle);
 	float shear = shear_value * uv.y;
-
-	uv.x += shear;
-	uv.x -= shear_value / 2.0;
-
-	uv.x *= 1.0 + abs(shear_value);
-	uv.x -= abs(shear_value) / 2.0;
-
-
 	float bar_count = float(count);
 	float bar_size = 1.0 / bar_count;
 	float separation_width = margin.x * bar_size;
-
 	float shape = 0.0;
-
+	
+	uv.x += shear;
+	uv.x -= shear_value / 2.0;
+	uv.x *= 1.0 + abs(shear_value);
+	uv.x -= abs(shear_value) / 2.0;
+	
+	
 	// Calculate each segment independently
 	for (int i = 0; i < count; i++) {
 		float segment_start = float(i) / bar_count;
-
+		
 		// How much of this segment is filled
-		float segment_fill = clamp(
-			(value - segment_start) / bar_size,
-			0.0,
-			1.0
-		);
-
+		float segment_fill = clamp((value - segment_start) / bar_size, 0.0, 1.0);
+		
 		// Segment width, accounting for margins
 		float segment_width = segment_fill * (bar_size - separation_width);
-
+		
 		// Shrink from right to left, keeping the left edge fixed
-		float segment_shape = step(
-			segment_start + separation_width * 0.5,
-			uv.x
-		) * step(
-			uv.x,
-			segment_start + segment_width + separation_width * 0.5
-		);
-
+		float segment_shape = step(segment_start + separation_width * 0.5, uv.x) * step(uv.x, segment_start + segment_width + separation_width * 0.5);
+		
 		// Vertical bounds
-		float vertical = step(margin.y * 0.5, uv.y)
-			* step(uv.y, 1.0 - margin.y * 0.5);
-
+		float vertical = step(margin.y * 0.5, uv.y) * step(uv.y, 1.0 - margin.y * 0.5);
+		
 		shape += segment_shape * vertical;
 	}
-
-
+	
+	
 	// Gradients
 	float gradient_x_pos = uv.x;
-
+	
 	if (use_value_gradient) {
 		gradient_x_pos = value;
 	}
-
-	vec4 gradient_color_x = get_gradient_color(
-		gradient_x,
-		gradient_x_pos
-	);
-
+	
+	vec4 gradient_color_x = get_gradient_color(gradient_x, gradient_x_pos);
+	
 	if (stepify) {
 		float step_size = float(count) / 2.0;
-
-		gradient_color_x = get_gradient_color(
-			gradient_x,
-			snap(gradient_x_pos, 1.0, step_size)
-		);
+		
+		gradient_color_x = get_gradient_color(gradient_x, snap(gradient_x_pos, 1.0, step_size));
 	}
-
-
-	float y = map_range(
-		0.5 - (1.0 - margin.y) / 2.0,
-		0.5 + (1.0 - margin.y) / 2.0,
-		0.0,
-		1.0,
-		uv.y
-	);
-
+	
+	
+	float y = map_range(0.5 - (1.0 - margin.y) / 2.0, 0.5 + (1.0 - margin.y) / 2.0, 0.0, 1.0, uv.y);
+	
 	if (invert) {
 		y = uv.y;
 		shape = 1.0 - shape;
 	}
-
+	
 	vec4 gradient_color_y = get_gradient_color(gradient_y, y);
-
-	vec4 gradient_color = mix(
-		gradient_color_x,
-		gradient_color_y,
-		gradient_color_y.a
-	);
-
+	vec4 gradient_color = mix(gradient_color_x, gradient_color_y, gradient_color_y.a);
+	
 	COLOR = vec4(gradient_color.rgb, clamp(shape, 0.0, 1.0));
 }
