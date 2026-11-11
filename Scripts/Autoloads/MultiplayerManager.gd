@@ -38,6 +38,10 @@ func start_server(data : Dictionary) -> void:
 	var err: Error = peer.create_server(SERVER_PORT)
 	var level: Enum.MAPS = data[Enum.SERVER_DATA.LEVEL]
 	
+	print("Level is ", level)
+	
+	serverData[Enum.SERVER_DATA.LEVEL] = level
+	
 	if err != OK:
 		var errCode: Enum.ERROR_CODES = Enum.ERROR_CODES.ERR_FAILED_TO_START_SERVER
 		Global.throw_error(errCode, "%s" % err)
@@ -76,8 +80,6 @@ func _server_handle_player_join(peerId : int) -> void:
 		multiplayer.peer_connected.disconnect(_server_handle_player_join)
 		return
 	create_player_data(peerId)
-	
-	
 
 func _server_handle_player_leave(peerId : int) -> void:
 	if !multiplayer.is_server():
@@ -97,6 +99,17 @@ func _handle_player_hit(shootingPlayerId : int, hitPlayerId : int) -> void:
 	
 	set_player_server_data(hitPlayerId, hitPlayerNewHealth, Enum.PLAYER_DATA.HEALTH)
 	update_health.rpc_id(hitPlayerId, hitPlayerNewHealth)
+
+@rpc("any_peer", "call_remote", "unreliable")
+func player_request_weapon_change(newWeapon : Enum.WEAPON_ID) -> void:
+	if !Enum.WEAPON_ID.find_key(newWeapon): print("code fails here line 102"); return
+	if !Global.weaponData.has(newWeapon): print("code fails here line 103"); return
+	if serverData[Enum.SERVER_DATA.LEVEL] != Enum.MAPS.DEV: print("code fails here line 104"); return
+	
+	var playerId: int = multiplayer.get_remote_sender_id()
+	print(" giving new weapon to player: ", playerId)
+	
+	
 
 @rpc("any_peer", "call_remote", "reliable")
 func server_handle_hit() -> void:
@@ -128,9 +141,7 @@ func player_reload() -> void:
 	
 	
 	await get_tree().create_timer(reloadTime - 0.5).timeout
-	
-	
-	
+
 
 ##Please do not remove this
 ##Otherwise the server will crash 🥺🥺🥺

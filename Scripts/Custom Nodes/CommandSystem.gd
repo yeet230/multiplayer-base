@@ -13,7 +13,7 @@ func _ready() -> void:
 	register_command(["tp", "teleport"], _command_player_teleport)
 	register_command(["freecam", "noclip"], _command_player_freecam)
 	register_command(["weapon-help", "help-w"], _command_weapon_help)
-	#register_command(["give"], _command_give_player_weapon)
+	register_command(["give"], _command_give_player_weapon)
 	#register_command(["setHealth"], _command_set_player_health)
 
 
@@ -62,11 +62,13 @@ func _command_weapon_help() -> void:
 	log_text("Avaliable weapons:", Color.CYAN)
 	for w in Enum.WEAPON_ID:
 		var key: int = Enum.WEAPON_ID.get(w)
-		print(Enum.WEAPON_ID.find_key(w))
 		log_text(str(w, " : ", key), Color.CYAN)
 	
 
 func _command_player_teleport(args : PackedStringArray) -> void:
+	print(args)
+	
+	
 	if args.size() != 3:
 		log_text("Expected 3 float arguments for the command", Color.RED)
 		return
@@ -88,10 +90,22 @@ func _command_player_freecam() -> void:
 
 
 func _command_give_player_weapon(args : PackedStringArray) -> void:
-	var newWeapon: int = int(args[0])
+	if args.size() != 1:
+		log_text(str("Expected 1 argument but recieved ", args.size(), " instead"), Color.RED)
+		return
 	
-	if Enum.WEAPON_ID.has(newWeapon):
-		MultiplayerManager.change_player_weapon(newWeapon)
+	var newWeapon: int = int(args[0])
+	var keyName: String = Enum.WEAPON_ID.find_key(newWeapon)
+	
+	
+	if Enum.WEAPON_ID.find_key(newWeapon):
+		MultiplayerManager.player_request_weapon_change.rpc_id(1, newWeapon)
+		
+		
+		log_text(str("Giving ", keyName," with the WEAPON_ID of ", newWeapon), Color.CYAN)
+	else:
+		log_text(str("Unkown weapon: ", newWeapon), Color.RED)
+
 
 func _command_set_player_health(_args : PackedStringArray) -> void:
 	pass

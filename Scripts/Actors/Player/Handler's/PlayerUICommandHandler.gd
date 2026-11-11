@@ -16,6 +16,7 @@ func toggle() -> void:
 	visible = !visible
 	consoleInput.grab_focus(!visible)
 	consoleInput.clear()
+	Global.commandPanelActive = visible
 
 func _update_log() -> void:
 	pass
@@ -53,7 +54,7 @@ func _on_console_input_text_submitted(userCommand: String) -> void:
 			
 	else:
 		var args : PackedStringArray = parts.slice(1)
-		Global.commandHandler.call_command_with_args(command, [""])
+		Global.commandHandler.call_command_with_args(command, args)
 		
 
 func cycle_up_command() -> void:

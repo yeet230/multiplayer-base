@@ -25,6 +25,8 @@ var gameController: GameController
 var commandHandler: CommandHandler
 var clientPlayer: Player
 
+var commandPanelActive: bool = false
+
 func _ready() -> void:
 	levels = { 
 		Enum.MAPS.DEV : preload("res://Scenes/3D/Levels/Dev/Dev.tscn"),
