@@ -2,7 +2,6 @@ class_name CommandHandler extends Node
 
 
 var clientCommands: Dictionary[String, Callable] = {}
-var serverCommands: Dictionary[String, Callable]
 var cmdAliases: PackedStringArray = []
 var UIHandler: Panel
 
@@ -13,6 +12,7 @@ func _ready() -> void:
 	register_command(["help"], _command_help)
 	register_command(["tp", "teleport"], _command_player_teleport)
 	register_command(["freecam", "noclip"], _command_player_freecam)
+	register_command(["weapon-help", "help-w"], _command_weapon_help)
 	#register_command(["give"], _command_give_player_weapon)
 	#register_command(["setHealth"], _command_set_player_health)
 
@@ -22,12 +22,9 @@ func log_text(text: String, colour : Color) -> void:
 	UIHandler.log_text(text, colour)
 
 #
-func register_command(command_name: PackedStringArray, ClientSideCallable: Callable, serverSideCallable : Callable = Callable()) -> void:
+func register_command(command_name: PackedStringArray, ClientSideCallable: Callable) -> void:
 	for i in range(command_name.size()):
 		clientCommands[command_name[i]] = ClientSideCallable
-		
-		if serverSideCallable.is_valid():
-			serverCommands[command_name[i]] = serverSideCallable
 		
 	cmdAliases.push_back(str(command_name))
 
@@ -47,29 +44,28 @@ func does_command_have_args(command : String) -> bool:
 
 func call_command(command : String) -> void:
 	clientCommands[command].call()
-	
-	if serverCommands.has(command):
-		serverCommands[command].rpc_id(1)
 
 func call_command_with_args(command : String, args : PackedStringArray) -> void:
 	clientCommands[command].call(args)
-	
-	if serverCommands.has(command):
-		serverCommands[command].rpc_id(1, args)
+
 
 
 #region Commands
 
 func _command_help() -> void:
-	if multiplayer.is_server():
-		return
-	else:
-		pass
-		log_text("Available commands: \n(Aliases are listed on the same row)", Color.CYAN)
-		for cmd in cmdAliases:
-			log_text("- " + cmd, Color.CYAN)
-#
-#
+	log_text("Available commands: \n(Aliases are listed on the same row)", Color.CYAN)
+	for cmd in cmdAliases:
+		log_text("- " + cmd, Color.CYAN)
+
+
+func _command_weapon_help() -> void:
+	log_text("Avaliable weapons:", Color.CYAN)
+	for w in Enum.WEAPON_ID:
+		var key: int = Enum.WEAPON_ID.get(w)
+		print(Enum.WEAPON_ID.find_key(w))
+		log_text(str(w, " : ", key), Color.CYAN)
+	
+
 func _command_player_teleport(args : PackedStringArray) -> void:
 	if args.size() != 3:
 		log_text("Expected 3 float arguments for the command", Color.RED)
@@ -91,9 +87,11 @@ func _command_player_freecam() -> void:
 	#log_text("Player freecam is now: " + str("Active" if player.freecamActive else "Inactive"), Color.CYAN)
 
 
-func _command_give_player_weapon(_args : PackedStringArray) -> void:
-	pass
-
+func _command_give_player_weapon(args : PackedStringArray) -> void:
+	var newWeapon: int = int(args[0])
+	
+	if Enum.WEAPON_ID.has(newWeapon):
+		MultiplayerManager.change_player_weapon(newWeapon)
 
 func _command_set_player_health(_args : PackedStringArray) -> void:
 	pass
