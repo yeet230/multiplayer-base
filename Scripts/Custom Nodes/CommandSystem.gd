@@ -15,8 +15,8 @@ func _ready() -> void:
 	register_command(["freecam", "noclip"], _command_player_freecam)
 	#register_command(["give"], _command_give_player_weapon)
 	#register_command(["setHealth"], _command_set_player_health)
-	
-	
+
+
 
 func log_text(text: String, colour : Color) -> void:
 	UIHandler.log_text(text, colour)
@@ -45,11 +45,17 @@ func does_command_have_args(command : String) -> bool:
 	return result
 
 
-func call_command(command : String, args : PackedStringArray) -> void:
-	if does_command_have_args(command):
-		clientCommands[command].call(args)
-	else:
-		clientCommands[command].call()
+func call_command(command : String) -> void:
+	clientCommands[command].call()
+	
+	if serverCommands.has(command):
+		serverCommands[command].rpc_id(1)
+
+func call_command_with_args(command : String, args : PackedStringArray) -> void:
+	clientCommands[command].call(args)
+	
+	if serverCommands.has(command):
+		serverCommands[command].rpc_id(1, args)
 
 
 #region Commands
@@ -64,21 +70,19 @@ func _command_help() -> void:
 			log_text("- " + cmd, Color.CYAN)
 #
 #
-func _command_player_teleport(_args : PackedStringArray) -> void:
-	pass
+func _command_player_teleport(args : PackedStringArray) -> void:
+	if args.size() != 3:
+		log_text("Expected 3 float arguments for the command", Color.RED)
+		return
 	
-	#if args.size() != 3:
-		#log_text("Expected 3 integer arguments for the command: tp", Color.RED)
-		#return
-	#
-	#var new_pos : Vector3 = Vector3(float(args[0]), float(args[1]), float(args[2]))
-	#
-	#for i in 3:
-		#if args[i].contains("+") or args[i].contains("-"):
-			#new_pos[i] = player.global_position[i] + float(args[i])
-	#
-	#player.global_position = new_pos
-	#log_text("Successfully teleported the player to: " + str(new_pos), Color.CYAN)
+	var new_pos : Vector3 = Vector3(float(args[0]), float(args[1]), float(args[2]))
+	
+	for i in 3:
+		if args[i].contains("+") or args[i].contains("-"):
+			new_pos[i] = Global.clientPlayer.global_position[i] + float(args[i])
+	
+	Global.clientPlayer.global_position = new_pos
+	log_text("Successfully teleported the player to: " + str(new_pos), Color.CYAN)
 
 
 func _command_player_freecam() -> void:

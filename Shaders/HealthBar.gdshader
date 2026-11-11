@@ -70,7 +70,6 @@ void fragment() {
 	// Calculate each segment independently
 	for (int i = 0; i < count; i++) {
 		float segment_start = float(i) / bar_count;
-		float segment_end = float(i + 1) / bar_count;
 
 		// How much of this segment is filled
 		float segment_fill = clamp(
@@ -79,28 +78,16 @@ void fragment() {
 			1.0
 		);
 
-		// Segment position
-		float segment_uv = (uv.x - segment_start) / bar_size;
+		// Segment width, accounting for margins
+		float segment_width = segment_fill * (bar_size - separation_width);
 
-		// Shrink the segment from its right edge
-		float segment_width = segment_fill * (1.0 - margin.x);
-
-		// Center the shrinking segment within its original space
-		float segment_center = segment_start + bar_size * 0.5;
-
-		float local_x = uv.x - segment_center;
-
+		// Shrink from right to left, keeping the left edge fixed
 		float segment_shape = step(
-			- segment_width * 0.5,
-			local_x
+			segment_start + separation_width * 0.5,
+			uv.x
 		) * step(
-			local_x,
-			segment_width * 0.5
-		);
-
-		float segment_y = square_shape(
-			vec2(uv.y, uv.y),
-			vec2(1.0, 1.0 - margin.y)
+			uv.x,
+			segment_start + segment_width + separation_width * 0.5
 		);
 
 		// Vertical bounds

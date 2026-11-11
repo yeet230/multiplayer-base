@@ -1,5 +1,8 @@
 extends Control
 
+@export var menuController: MainMenu
+
+
 @onready var mapSelector: OptionButton = $VBoxContainer/HBoxContainer/Map
 
 var mapNames: Dictionary[Enum.MAPS, String] = {

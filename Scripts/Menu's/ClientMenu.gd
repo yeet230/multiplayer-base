@@ -1,5 +1,7 @@
 extends Control
 
+@export var menuController: MainMenu
+
 @onready var ipInput: LineEdit = $MainVboxContainer/VBoxContainer/IpInput
 @onready var portInput: LineEdit = $MainVboxContainer/VBoxContainer/PortInput
 

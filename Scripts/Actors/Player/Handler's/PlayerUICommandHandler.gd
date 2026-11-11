@@ -27,11 +27,13 @@ func log_text(text: String, colour : Color) -> void:
 func _on_console_input_text_submitted(userCommand: String) -> void:
 	consoleInput.clear()
 	consoleInput.grab_focus()
-	previousInputs.push_front(userCommand)
-	index = -1
+	
 	
 	if userCommand.strip_edges() == "":
 		return
+	
+	previousInputs.push_front(userCommand)
+	index = -1
 	
 	log_text("> " + userCommand, Color.YELLOW)
 	
@@ -47,10 +49,12 @@ func _on_console_input_text_submitted(userCommand: String) -> void:
 			log_text("Incorrect number of arguments for the command: " + command, Color.RED)
 			return
 		else:
-			Global.commandHandler.call_command(command, [""])
+			Global.commandHandler.call_command(command)
+			
 	else:
 		var args : PackedStringArray = parts.slice(1)
-		Global.commandHandler.call_command(command, args)
+		Global.commandHandler.call_command_with_args(command, [""])
+		
 
 func cycle_up_command() -> void:
 	if previousInputs.is_empty(): return

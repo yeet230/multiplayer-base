@@ -10,6 +10,10 @@ func _ready() -> void:
 	if !is_multiplayer_authority(): return
 	curHealth = maxHealth
 
+func setup() -> void:
+	localPlayer.ui.update_healthbar(curHealth, maxHealth)
+	
+
 ##Please do not remove this 🥺🥺
 func update_health(newHealth : float) -> void:
 	curHealth = newHealth

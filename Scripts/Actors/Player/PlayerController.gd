@@ -1,6 +1,6 @@
 class_name Player extends CharacterBase 
 
-var ui: PlayerUi
+@onready var ui: PlayerUi
 
 @onready var inputHandler: PlayerInputHandler = $InputHandler
 @onready var movementController: PlayerMovementController = $PlayerMovementController
@@ -13,6 +13,8 @@ func _ready() -> void:
 	if !is_multiplayer_authority(): return
 	Global.clientPlayer = self
 	_instantiate_UI()
+	
+	playerHealthManager.setup()
 	
 	weaponManager._equip_new_weapon(Enum.WEAPON_ID.AK_47)
 

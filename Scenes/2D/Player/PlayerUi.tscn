@@ -10,8 +10,8 @@ shader = ExtResource("3_to7aa")
 shader_parameter/stepify = true
 shader_parameter/value = 1.0
 shader_parameter/count = 4
-shader_parameter/margin = Vector2(0.755, 0)
-shader_parameter/shear_angle = -0.04999995487499997
+shader_parameter/margin = Vector2(0.05, 0)
+shader_parameter/shear_angle = 0.0
 shader_parameter/use_value_gradient = false
 shader_parameter/invert = false
 
@@ -26,21 +26,24 @@ script = ExtResource("1_uc6jw")
 
 [node name="DebugUI" type="CanvasLayer" parent="." unique_id=1013096440]
 
-[node name="HealthBar" type="ColorRect" parent="DebugUI" unique_id=1010039361]
-material = SubResource("ShaderMaterial_n6exp")
-anchors_preset = 7
-anchor_left = 0.5
+[node name="Health" type="HBoxContainer" parent="DebugUI" unique_id=1616324996]
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -243.5
-offset_top = -30.0
-offset_right = 243.5
-offset_bottom = -3.0
-grow_horizontal = 2
+offset_top = -28.0
+offset_right = 438.0
 grow_vertical = 0
+
+[node name="HealthBar" type="ColorRect" parent="DebugUI/Health" unique_id=1010039361]
+material = SubResource("ShaderMaterial_n6exp")
+custom_minimum_size = Vector2(300, 22)
+layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
+
+[node name="HealthBarText" type="Label" parent="DebugUI/Health" unique_id=711724861]
+layout_mode = 2
+text = "Health: cur/max"
 
 [node name="LeftVBoxContainer" type="VBoxContainer" parent="DebugUI" unique_id=922441176]
 offset_right = 40.0
@@ -69,6 +72,7 @@ text = "Position:"
 layout_mode = 2
 
 [node name="PlayerCommandUI" parent="DebugUI" unique_id=412367365 instance=ExtResource("2_12qdn")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082961794]
 

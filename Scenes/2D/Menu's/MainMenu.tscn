@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://clmane4tnahtp" path="res://Resources/Menu's/MainMenu.tres" id="1_0nft5"]
 [ext_resource type="Script" uid="uid://yv2w3la70h3r" path="res://Scripts/Menu's/MainMenu.gd" id="1_i26rj"]
 [ext_resource type="PackedScene" uid="uid://bwdt4nq8pr5ke" path="res://Scenes/2D/Menu's/ClientMenu.tscn" id="2_eiy7p"]
+[ext_resource type="PackedScene" uid="uid://gotmx7hx0o7l" path="res://Scenes/2D/Menu's/SettingsMenu.tscn" id="4_favh5"]
 [ext_resource type="PackedScene" uid="uid://d0okxry2sj1hu" path="res://Scenes/2D/Menu's/HostMenuSetup.tscn" id="4_neomk"]
-[ext_resource type="PackedScene" uid="uid://rnt3man7mim7" path="res://SystemMessage.tscn" id="5_favh5"]
 
 [node name="MainMenu" type="Control" unique_id=2020584402]
 layout_mode = 3
@@ -28,11 +28,6 @@ grow_vertical = 2
 theme = ExtResource("1_0nft5")
 script = ExtResource("1_i26rj")
 metadata/_custom_type_script = "uid://yv2w3la70h3r"
-
-[node name="ClientMenu" parent="MenuItems/MenuHandler" unique_id=484369215 instance=ExtResource("2_eiy7p")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
 
 [node name="MainMenu" type="Control" parent="MenuItems/MenuHandler" unique_id=1422905097]
 unique_name_in_owner = true
@@ -79,23 +74,32 @@ layout_mode = 2
 text = "Quit
 "
 
-[node name="HostMenu" parent="MenuItems/MenuHandler" unique_id=2097086261 instance=ExtResource("4_neomk")]
+[node name="ClientMenu" parent="MenuItems/MenuHandler" unique_id=484369215 node_paths=PackedStringArray("menuController") instance=ExtResource("2_eiy7p")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+menuController = NodePath("..")
+
+[node name="SettingsMenu" parent="MenuItems/MenuHandler" unique_id=1359968138 node_paths=PackedStringArray("menuController") instance=ExtResource("4_favh5")]
+visible = false
+layout_mode = 1
+menuController = NodePath("..")
+
+[node name="HostMenu" parent="MenuItems/MenuHandler" unique_id=2097086261 node_paths=PackedStringArray("menuController") instance=ExtResource("4_neomk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+menuController = NodePath("..")
 
 [node name="Back" type="Button" parent="MenuItems/MenuHandler" unique_id=1347148991]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = -31.0
-offset_right = 53.0
+offset_right = 57.0
 offset_bottom = -4.0
 grow_vertical = 0
 text = "Back"
-
-[node name="SystemMessage" parent="MenuItems/MenuHandler" unique_id=2107457494 instance=ExtResource("5_favh5")]
-visible = false
-layout_mode = 1

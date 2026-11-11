@@ -15,6 +15,7 @@ var menuItems
 @onready var mainMenu: Control = %MainMenu
 @onready var clientMenu: Control = %ClientMenu
 @onready var hostMenu: Control = %HostMenu
+@onready var settingsMenu: Control = $SettingsMenu
 
 
 @onready var displayElementsCanvasLayer: CanvasLayer = $"../../DisplayElements"
@@ -36,6 +37,7 @@ func _ready() -> void:
 		mainMenu,
 		clientMenu,
 		hostMenu,
+		settingsMenu,
 	]
 	
 	_auto_mode_set()
@@ -46,7 +48,7 @@ func _ready() -> void:
 	
 	playButton.pressed.connect(_on_play_pressed)
 	hostButton.pressed.connect(_on_host_pressed)
-	#gameSettingsButton.pressed.connect()
+	gameSettingsButton.pressed.connect(_on_settings_pressed)
 	quickJoinButton.pressed.connect(_on_quick_join_pressed)
 	quitButton.pressed.connect(_on_quit_pressed)
 	backButton.pressed.connect(_on_back_pressed)
@@ -109,22 +111,11 @@ func _connection_failed() -> void:
 	_spawn_system_message(reason, desc)
 	set_canvas_items_visibility(true)
 
-
-
-
-
-
+func _on_settings_pressed() -> void:
+	_change_menu_level(settingsMenu)
 
 func _on_play_pressed() -> void:
 	_change_menu_level(clientMenu)
-	var reason: String = "N/A"
-	var desc: String = ":0"
-	desc = "The game instance is unable to reach the server, please check your network connection then try again"
-	
-	
-	print("disconnected")
-	
-	_spawn_system_message(reason, desc)
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
