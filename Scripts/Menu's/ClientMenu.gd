@@ -19,4 +19,5 @@ func _on_join_pressed() -> void:
 		return
 	
 	MultiplayerManager.join_server.call_deferred(ip, port)
+	menuController.hide()
 	

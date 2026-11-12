@@ -54,11 +54,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Port: "
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/PortHBox" unique_id=346612243]
+[node name="PortInput" type="LineEdit" parent="VBoxContainer/PortHBox" unique_id=346612243]
 layout_mode = 2
 text = "39286"
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1426162596]
+[node name="HostButton" type="Button" parent="VBoxContainer" unique_id=1426162596]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_stretch_ratio = 2.05
