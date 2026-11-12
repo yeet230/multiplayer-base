@@ -4,6 +4,7 @@ extends Control
 @onready var hostButton: Button = $VBoxContainer/HostButton
 
 @onready var portInput: LineEdit = $VBoxContainer/PortHBox/PortInput
+@onready var checkButton: CheckButton = $VBoxContainer/SpawnPlayerHBox/CheckButton
 
 @onready var mapSelector: OptionButton = $VBoxContainer/HBoxContainer/Map
 
@@ -24,10 +25,14 @@ func _ready() -> void:
 func _on_host_pressed() -> void:
 	var map = mapSelector.selected as Enum.MAPS
 	var port: int = int(portInput.text)
+	var spawnPlayer: bool = checkButton.button_pressed
 	
 	var data: Dictionary[Enum.SERVER_DATA, Variant] = {
 		Enum.SERVER_DATA.LEVEL : map,
 		Enum.SERVER_DATA.PORT : port,
+		Enum.SERVER_DATA.SPAWN_PLAYER : spawnPlayer
 	}
 	
+	
+	menuController.hide()
 	MultiplayerManager.start_server.call_deferred(data)

@@ -33,14 +33,24 @@ func get_player_health(playerId : int) -> float:
 	var result: float = serverStoredPlayerData[playerId][Enum.PLAYER_DATA.HEALTH]
 	return result
 
+func spawn_player() -> bool:
+	var result: bool = serverData[Enum.SERVER_DATA.SPAWN_PLAYER]
+	return result
+
 func start_server(data : Dictionary) -> void:
 	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	var err: Error = peer.create_server(SERVER_PORT)
 	var level: Enum.MAPS = data[Enum.SERVER_DATA.LEVEL]
+	var spawnPlayer: bool = data[Enum.SERVER_DATA.SPAWN_PLAYER]
+	var port: int = data[Enum.SERVER_DATA.PORT]
 	
 	print("Level is ", level)
 	
-	serverData[Enum.SERVER_DATA.LEVEL] = level
+	serverData = {
+		Enum.SERVER_DATA.LEVEL : level,
+		Enum.SERVER_DATA.SPAWN_PLAYER : spawnPlayer,
+		Enum.SERVER_DATA.PORT : port,
+	}
 	
 	if err != OK:
 		var errCode: Enum.ERROR_CODES = Enum.ERROR_CODES.ERR_FAILED_TO_START_SERVER
@@ -111,7 +121,7 @@ func player_request_weapon_change(newWeapon : Enum.WEAPON_ID) -> void:
 	
 	
 
-@rpc("any_peer", "call_remote", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func server_handle_hit() -> void:
 	var senderId: int = multiplayer.get_remote_sender_id()
 	var player: Player = get_player_from_id(senderId)
@@ -141,6 +151,8 @@ func player_reload() -> void:
 	
 	
 	await get_tree().create_timer(reloadTime - 0.5).timeout
+
+
 
 
 ##Please do not remove this

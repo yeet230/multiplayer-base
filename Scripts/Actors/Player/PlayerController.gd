@@ -20,11 +20,15 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	if Global.commandPanelActive: return
 	
 	inputHandler.tick()
-	movementController.tick(delta)
 	weaponManager.tick()
+	
+	
+	if Global.commandPanelActive: return
+	
+	
+	movementController.tick(delta)
 	
 	ui.tick()
 

@@ -27,6 +27,11 @@ func _enter_tree():
 func _ready():
 	if !is_multiplayer_authority(): return
 	
+	if multiplayer.is_server():
+		if MultiplayerManager.spawn_player():
+			add_player(1)
+	
+	
 	spawn_path = self.get_path()
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(del_player)
@@ -36,6 +41,8 @@ func _ready():
 		add_player(peer)
 
 func _custom_spawn_func(data : Variant) -> Node:
+	print("Player spawned")
+	
 	var player = player_scene.instantiate() as Player
 	player.name = str(data.multiplayer_id)
 	player.set_multiplayer_authority(data.multiplayer_id)
