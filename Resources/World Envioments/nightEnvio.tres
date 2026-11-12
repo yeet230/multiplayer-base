@@ -1,0 +1,14 @@
+[gd_resource type="Environment" format=3 uid="uid://kfidut20c74r"]
+
+[ext_resource type="Texture2D" uid="uid://b4nf3a3feasf5" path="res://Assets/2D/kenney_skyboxes/Skyboxes/skybox-night.png" id="1_bto4i"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bto4i"]
+panorama = ExtResource("1_bto4i")
+
+[sub_resource type="Sky" id="Sky_wpjpn"]
+sky_material = SubResource("PanoramaSkyMaterial_bto4i")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.05
+sky = SubResource("Sky_wpjpn")

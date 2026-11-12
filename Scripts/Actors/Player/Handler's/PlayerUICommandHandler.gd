@@ -17,9 +17,11 @@ func toggle() -> void:
 	consoleInput.grab_focus(!visible)
 	consoleInput.clear()
 	Global.commandPanelActive = visible
-
-func _update_log() -> void:
-	pass
+	
+	if visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func log_text(text: String, colour : Color) -> void:
 	consoleOutput.push_color(colour)
@@ -28,7 +30,6 @@ func log_text(text: String, colour : Color) -> void:
 func _on_console_input_text_submitted(userCommand: String) -> void:
 	consoleInput.clear()
 	consoleInput.grab_focus()
-	
 	
 	if userCommand.strip_edges() == "":
 		return
@@ -51,7 +52,6 @@ func _on_console_input_text_submitted(userCommand: String) -> void:
 			return
 		else:
 			Global.commandHandler.call_command(command)
-			
 	else:
 		var args : PackedStringArray = parts.slice(1)
 		Global.commandHandler.call_command_with_args(command, args)

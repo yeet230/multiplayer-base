@@ -1,0 +1,13 @@
+[gd_resource type="Environment" format=3 uid="uid://bmicaqfrilceo"]
+
+[ext_resource type="Texture2D" uid="uid://d0kh2xub7bnmc" path="res://Assets/2D/kenney_skyboxes/Skyboxes/skybox-space.png" id="1_55hlp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_55hlp"]
+panorama = ExtResource("1_55hlp")
+
+[sub_resource type="Sky" id="Sky_roka5"]
+sky_material = SubResource("PanoramaSkyMaterial_55hlp")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_roka5")

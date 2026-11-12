@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://3vjhrugabtqb"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ah60x"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 8.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ah60x"]
+size = Vector3(1, 0.2, 0.4)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ah60x"]
+radius = 0.125
+height = 0.25
+
+[node name="Streetlight" type="Node3D" unique_id=1452827594]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1716529582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+mesh = SubResource("CylinderMesh_ah60x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1565895618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 8, 0)
+mesh = SubResource("BoxMesh_ah60x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2" unique_id=1848483062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.05390358, 0)
+mesh = SubResource("SphereMesh_ah60x")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D2/MeshInstance3D" unique_id=1908842405]
+visible = false
+omni_range = 16.665731
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MeshInstance3D2/MeshInstance3D" unique_id=1439869540]
+transform = Transform3D(0.99653476, 3.6357861e-09, -0.08317709, 0.08317709, -4.355992e-08, 0.99653476, 0, -1, -4.371139e-08, 0, 0, 0)
+light_energy = 2.0
+spot_range = 12.379891
+spot_angle = 39.20886

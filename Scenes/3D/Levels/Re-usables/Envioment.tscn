@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://bgrsf4ars0t2k"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4rnwr"]
-
-[sub_resource type="Sky" id="Sky_vbetb"]
-sky_material = SubResource("ProceduralSkyMaterial_4rnwr")
-
-[sub_resource type="Environment" id="Environment_g7fu1"]
-background_mode = 2
-sky = SubResource("Sky_vbetb")
+[ext_resource type="Environment" uid="uid://diwnbi45nw36r" path="res://Resources/World Envioments/AlienEnvio.tres" id="1_2wvah"]
+[ext_resource type="Script" uid="uid://dn02rrwxxt2yh" path="res://Scenes/3D/Levels/Re-usables/WorldEnvio.gd" id="1_wm5lh"]
 
 [node name="Node3D" type="WorldEnvironment" unique_id=223647769]
-environment = SubResource("Environment_g7fu1")
+environment = ExtResource("1_2wvah")
+script = ExtResource("1_wm5lh")
+activeSkyBox = 4
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=934387605]
+visible = false

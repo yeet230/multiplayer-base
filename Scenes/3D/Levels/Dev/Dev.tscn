@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bgrsf4ars0t2k" path="res://Scenes/3D/Levels/Re-usables/Envioment.tscn" id="1_fmtgt"]
 [ext_resource type="PackedScene" uid="uid://cpkoj21d21a2h" path="res://Scenes/3D/Actors/Player/playerSpawner.tscn" id="1_jkeh8"]
+[ext_resource type="Environment" uid="uid://kfidut20c74r" path="res://Resources/World Envioments/nightEnvio.tres" id="2_wqv6s"]
+[ext_resource type="PackedScene" uid="uid://3vjhrugabtqb" path="res://Scenes/3D/Decals/Static/streetlight.tscn" id="4_jxoxp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g7fu1"]
 size = Vector2(100, 100)
@@ -20,5 +22,15 @@ mesh = SubResource("PlaneMesh_g7fu1")
 shape = SubResource("ConvexPolygonShape3D_fmtgt")
 
 [node name="WorldEnvio" parent="." unique_id=223647769 instance=ExtResource("1_fmtgt")]
+environment = ExtResource("2_wqv6s")
 
 [node name="PlayerSpawner" parent="." unique_id=473352764 instance=ExtResource("1_jkeh8")]
+
+[node name="Streetlight" parent="." unique_id=1452827594 instance=ExtResource("4_jxoxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10)
+
+[node name="Streetlight2" parent="." unique_id=1103156508 instance=ExtResource("4_jxoxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -8)
+
+[node name="Streetlight3" parent="." unique_id=392766126 instance=ExtResource("4_jxoxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -19)

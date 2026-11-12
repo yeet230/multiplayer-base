@@ -17,6 +17,8 @@ func _ready() -> void:
 	playerHealthManager.setup()
 	
 	weaponManager._equip_new_weapon(Enum.WEAPON_ID.AK_47)
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
